@@ -4,12 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+This site is an attempt to document my life as a coder a bit better. Its purpose is to serve as a complement to code published on my [github account](https://github.com/mzucker). Related: I am user [mattz on shadertoy.com](https://www.shadertoy.com/user/mattz).
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+Also check out [my professional homepage](http://www.swarthmore.edu/NatSci/mzucker1/).
