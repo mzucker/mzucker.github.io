@@ -8,7 +8,7 @@ permalink: /about/
 
 This site is an attempt to document my life as a coder. You can also find me in various other places online:
 
-  * {::nomarkdown}{% include icon-github.html username=site.github_username %}{:/nomarkdown}
-  * {::nomarkdown}{% include icon-twitter.html username=site.twitter_username %}{:/nomarkdown}
-  * [shadertoy.com/user/mattz](https://www.shadertoy.com/user/mattz)
+  * <a href="https://github.com/mzucker"><span class="icon">{% include icon-github.svg %}</span> mzucker</a>
+  * <a href="https://twitter.com/matt_zucker"><span class="icon">{% include icon-twitter.svg %}</span> matt_zucker</a>
+  * <a href="https://shadertoy.com/user/mattz"><span class="icon">{% include icon-shadertoy.svg %} mattz</span></a>
   * [swarthmore.edu](http://www.swarthmore.edu/NatSci/mzucker1/)
