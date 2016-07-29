@@ -24,6 +24,12 @@
     }
 }
 
+.site-desc {
+   float: left;
+   clear: left;
+   font-size: 12px;
+}
+
 .site-nav {
     float: right;
     line-height: 56px;
@@ -191,9 +197,12 @@
 
 .post-link {
     display: block;
-    font-size: 24px;
+    //font-size: 24px;
 }
 
+.rss-subscribe {
+    font-size: 12px;
+}
 
 
 /**
@@ -204,7 +213,7 @@
 }
 
 .post-title {
-    font-size: 42px;
+    font-size: 26px;
     letter-spacing: -1px;
     line-height: 1;
 

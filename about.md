@@ -6,6 +6,9 @@ permalink: /about/
 
 ![Beer and robots pair nicely.](/images/beer-n-puma.jpg){:class="img-responsive"}
 
-This site is an attempt to document my life as a coder a bit better. Its purpose is to serve as a complement to code published on my [github account](https://github.com/mzucker). Related: I am user [mattz on shadertoy.com](https://www.shadertoy.com/user/mattz).
+This site is an attempt to document my life as a coder. You can also find me in various other places online:
 
-Also check out [my professional homepage](http://www.swarthmore.edu/NatSci/mzucker1/).
+  * {::nomarkdown}{% include icon-github.html username=site.github_username %}{:/nomarkdown}
+  * {::nomarkdown}{% include icon-twitter.html username=site.twitter_username %}{:/nomarkdown}
+  * [shadertoy.com/user/mattz](https://www.shadertoy.com/user/mattz)
+  * [swarthmore.edu](http://www.swarthmore.edu/NatSci/mzucker1/)
