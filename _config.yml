@@ -10,7 +10,7 @@ title: Needlessly complex
 description: > # this means to ignore newlines until "baseurl:"
   Why do it by hand if you can code it in just quadruple the time?
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "mzucker.github.io" # the base hostname & protocol for your site
+url: "https://mzucker.github.io" # the base hostname & protocol for your site
 twitter_username: matt_zucker
 github_username:  mzucker
 
