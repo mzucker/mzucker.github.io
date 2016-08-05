@@ -204,3 +204,43 @@ pre {
         }
     }
 }
+
+.center-image
+{
+    margin: 0 auto;
+    display: block;
+}
+
+.halfwidth
+{
+   width: 50%
+}
+
+.footnotes
+{
+  border-top: 1px solid #bbb;
+  margin-top: 24px;
+  padding-top: 24px;
+}
+
+table {
+    margin: 0 auto;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    padding: 4px;
+}
+
+table th {
+   padding: 4px 12px;
+}
+
+thead tr {
+    background-color: #eee;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
