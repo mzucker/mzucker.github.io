@@ -16,3 +16,6 @@ github_username:  mzucker
 
 # Build settings
 markdown: kramdown
+
+# Google services
+google_analytics: UA-82495353-1
