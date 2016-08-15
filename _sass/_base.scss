@@ -211,9 +211,31 @@ pre {
     display: block;
 }
 
+.center-border
+{
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #000;
+}
+
 .halfwidth
 {
-   width: 50%
+    width: 50%
+}
+
+.center-half
+{
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+}
+
+.center-half-border
+{
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+    border: 1px solid #000;
 }
 
 .footnotes
@@ -224,7 +246,7 @@ pre {
 }
 
 table {
-    margin: 0 auto;
+    margin: 16px auto;
     border-spacing: 0px;
     border-collapse: collapse;
 }
