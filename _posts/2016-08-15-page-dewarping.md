@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Page dewarping
-comments: disabled
 ---
 
 Flattening images of curled pages, as an optimization problem.
@@ -100,7 +99,8 @@ dewarping puzzle as an optimization problem:
 
  - identify a number of *keypoints* along horizontal text spans in the
    original photograph
- - starting from a naïve initial guess, find the parameters $$\mathbf{r}$$,
+
+- starting from a naïve initial guess, find the parameters $$\mathbf{r}$$,
    $$\mathbf{t}$$, $$\alpha$$, $$\beta$$, $$y_1$$, $$\ldots$$,
    $$y_n$$, $$x_1^{(1)}$$, $$\ldots$$, $$x_n^{(m_n)}$$ 
    which minimize the [reprojection error](https://en.wikipedia.org/wiki/Reprojection_error)
