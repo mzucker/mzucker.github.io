@@ -33,7 +33,7 @@ Background
 ==========
 
 I am by no means the first person to come up with a method for
-document image dewarping -- it's even implemented in the open-source
+document image dewarping -- it's even implemented in Dan Bloomberg's open-source
 image processing library
 [Leptonica](http://www.leptonica.com/dewarping.html) -- but when it
 comes to understanding a problem, there's nothing quite like
