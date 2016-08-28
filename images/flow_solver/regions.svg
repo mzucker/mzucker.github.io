@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="522px" height="253px" >
+  <pattern  x="1" y="1" width="16" height="16" patternUnits="userSpaceOnUse" id="blue_region" viewBox="1 1 16 16" overflow="visible">
+    <rect x="1" y="1" width="16" height="16" />
+    <g fill="#303060">
+      <polygon points="1,1, 9,1 17,9, 17,17"/>
+      <polygon points="1,9 9,17 1,17" />
+    </g>
+  </pattern>
+  <pattern  x="1" y="1" width="16" height="16" patternUnits="userSpaceOnUse" id="purple_region" viewBox="1 1 16 16" overflow="visible">
+    <rect x="1" y="1" width="16" height="16" />
+    <g fill="#603060">
+      <polygon points="1,1, 9,1 17,9, 17,17"/>
+      <polygon points="1,9 9,17 1,17" />
+    </g>
+  </pattern>
+  <rect fill="#7B7C41" width="253" height="253"/>
+  <rect x="1" y="1" fill="#393972" width="35" height="35"/>
+  <rect x="37" y="1" fill="#393972" width="35" height="35"/>
+  <rect x="73" y="1" fill="#393972" width="35" height="35"/>
+  <rect x="109" y="1" fill="#393972" width="35" height="35"/>
+  <rect x="145" y="1" fill="#393972" width="35" height="35"/>
+  <rect x="181" y="1" fill="#393972" width="35" height="35"/>
+  <rect x="217" y="1" fill="#393972" width="35" height="35"/>
+  <circle fill="#0000FF" cx="234.5" cy="18.5" r="12.25"/>
+  <rect x="1" y="37" fill="#393972" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="37" y="37" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="73" y="37" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="109" y="37" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="145" y="37" width="35" height="35"/>
+  <rect x="181" y="37" fill="#725539" width="35" height="35"/>
+  <circle fill="#FF8000" cx="198.5" cy="54.5" r="12.25"/>
+  <rect x="217" y="37" fill="#723939" width="35" height="35"/>
+  <circle fill="#FF0000" cx="234.5" cy="54.5" r="12.25"/>
+  <rect x="1" y="73" fill="#393972" width="35" height="35"/>
+  <rect x="37" y="73" width="35" height="35"/>
+  <circle fill="#FF8000" cx="54.5" cy="90.5" r="12.25"/>
+  <rect fill="url(#purple_region)" x="73" y="73" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="109" y="73" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="145" y="73" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="181" y="73" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="217" y="73" width="35" height="35"/>
+  <rect x="1" y="109" fill="#393972" width="35" height="35"/>
+  <rect x="37" y="109" fill="#393972" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="73" y="109" width="35" height="35"/>
+  <rect x="109" y="109" width="35" height="35"/>
+  <circle fill="#008100" cx="126.5" cy="126.5" r="12.25"/>
+  <rect x="145" y="109" width="35" height="35"/>
+  <circle fill="#00FFFF" cx="162.5" cy="126.5" r="12.25"/>
+  <rect fill="url(#purple_region)" x="181" y="109" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="217" y="109" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="1" y="145" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="37" y="145" width="35" height="35"/>
+  <rect x="73" y="145" fill="#395539" width="35" height="35"/>
+  <circle fill="#008100" cx="90.5" cy="162.5" r="12.25"/>
+  <rect fill="url(#blue_region)" x="109" y="145" width="35" height="35"/>
+  <rect x="145" y="145" width="35" height="35"/>
+  <circle fill="#EEEE00" cx="162.5" cy="162.5" r="12.25"/>
+  <rect fill="url(#purple_region)" x="181" y="145" width="35" height="35"/>
+  <rect fill="url(#purple_region)" x="217" y="145" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="1" y="181" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="37" y="181" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="73" y="181" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="109" y="181" width="35" height="35"/>
+  <rect x="145" y="181" width="35" height="35"/>
+  <circle fill="#FF0000" cx="162.5" cy="198.5" r="12.25"/>
+  <rect x="181" y="181" fill="#6E6E39" width="35" height="35"/>
+  <circle fill="#EEEE00" cx="198.5" cy="198.5" r="12.25"/>
+  <rect fill="url(#purple_region)" x="217" y="181" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="1" y="217" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="37" y="217" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="73" y="217" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="109" y="217" width="35" height="35"/>
+  <rect fill="url(#blue_region)" x="145" y="217" width="35" height="35"/>
+  <rect x="181" y="217" width="35" height="35"/>
+  <circle fill="#0000FF" cx="198.5" cy="234.5" r="12.25"/>
+  <rect x="217" y="217" fill="#397272" width="35" height="35"/>
+  <circle fill="#00FFFF" cx="234.5" cy="234.5" r="12.25"/>
+  <path fill="none" stroke="#0000FF" stroke-width="12.25" stroke-linecap="round" d="M54.5,126.5h-36v-36v-36v-36h36h36h36h36h36h36"
+	/>
+
+  <g transform="translate(269,1)">
+  <rect x="-1" y="-1" fill="#7B7C41" width="253" height="253"/>
+  <rect x="1" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="26" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="51" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="76" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="101" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="126" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="151" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="176" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="201" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="226" y="1" fill="#6E6E39" width="24" height="24"/>
+  <rect x="1" y="26" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="26" y="26" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="51" y="26" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="76" y="26" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="101" y="26" width="24" height="24"/>
+  <rect x="126" y="26" fill="#723939" width="24" height="24"/>
+  <rect x="151" y="26" fill="#723939" width="24" height="24"/>
+  <rect x="176" y="26" fill="#723939" width="24" height="24"/>
+  <rect x="201" y="26" fill="#723939" width="24" height="24"/>
+  <rect x="226" y="26" fill="#6E6E39" width="24" height="24"/>
+  <rect x="1" y="51" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="26" y="51" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="51" y="51" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="76" y="51" width="24" height="24"/>
+  <rect fill="url(#blue_region)" x="101" y="51" width="24" height="24"/>
+  <rect x="126" y="51" fill="#723939" width="24" height="24"/>
+  <rect x="151" y="51" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="176" y="51" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="201" y="51" fill="#723939" width="24" height="24"/>
+  <circle fill="#FF0000" cx="213" cy="63" r="8.4"/>
+  <rect x="226" y="51" fill="#6E6E39" width="24" height="24"/>
+  <rect x="1" y="76" fill="#6E6E39" width="24" height="24"/>
+  <rect x="26" y="76" fill="#6E6E39" width="24" height="24"/>
+  <rect x="51" y="76" fill="#6E6E39" width="24" height="24"/>
+  <rect x="76" y="76" width="24" height="24"/>
+  <circle fill="#00FFFF" cx="88" cy="88" r="8.4"/>
+  <rect x="101" y="76" width="24" height="24"/>
+  <circle fill="#FF8000" cx="113" cy="88" r="8.4"/>
+  <rect x="126" y="76" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="151" y="76" width="24" height="24"/>
+  <circle fill="#008100" cx="163" cy="88" r="8.4"/>
+  <rect x="176" y="76" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="201" y="76" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="226" y="76" fill="#6E6E39" width="24" height="24"/>
+  <rect x="1" y="101" width="24" height="24"  fill="url(#purple_region)"/>
+  <rect x="26" y="101" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="51" y="101" fill="#6E6E39" width="24" height="24"/>
+  <circle fill="#EEEE00" cx="63" cy="113" r="8.4"/>
+  <rect x="76" y="101" width="24" height="24"  fill="url(#purple_region)"/>
+  <rect x="101" y="101" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="126" y="101" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="151" y="101" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="176" y="101" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="201" y="101" width="24" height="24" fill="url(#purple_region)"/>
+  <rect x="226" y="101" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="1" y="126" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="26" y="126" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="51" y="126" width="24" height="24"/>
+  <rect x="76" y="126" width="24" height="24"/>
+  <circle fill="#FF0000" cx="88" cy="138" r="8.4"/>
+  <rect fill="url(#purple_region)" x="101" y="126" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="126" y="126" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="151" y="126" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="176" y="126" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="201" y="126" width="24" height="24"/>
+  <rect x="226" y="126" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="1" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="26" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="51" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="76" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="101" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="126" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="151" y="151" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="176" y="151" width="24" height="24"/>
+  <rect x="201" y="151" fill="#725539" width="24" height="24"/>
+  <circle fill="#FF8000" cx="213" cy="163" r="8.4"/>
+  <rect x="226" y="151" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="1" y="176" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="26" y="176" width="24" height="24"/>
+  <rect x="51" y="176" fill="#395539" width="24" height="24"/>
+  <circle fill="#008100" cx="63" cy="188" r="8.4"/>
+  <rect fill="url(#purple_region)" x="76" y="176" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="101" y="176" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="126" y="176" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="151" y="176" width="24" height="24"/>
+  <rect x="176" y="176" fill="#397272" width="24" height="24"/>
+  <circle fill="#00FFFF" cx="188" cy="188" r="8.4"/>
+  <rect x="201" y="176" fill="#393972" width="24" height="24"/>
+  <circle fill="#0000FF" cx="213" cy="188" r="8.4"/>
+  <rect x="226" y="176" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="1" y="201" width="24" height="24"/>
+  <rect x="26" y="201" width="24" height="24"/>
+  <circle fill="#0000FF" cx="38" cy="213" r="8.4"/>
+  <rect fill="url(#purple_region)" x="51" y="201" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="76" y="201" width="24" height="24"/>
+  <rect x="101" y="201" fill="#393972" width="24" height="24"/>
+  <rect x="126" y="201" fill="#393972" width="24" height="24"/>
+  <rect x="151" y="201" fill="#393972" width="24" height="24"/>
+  <rect x="176" y="201" fill="#393972" width="24" height="24"/>
+  <rect x="201" y="201" fill="#393972" width="24" height="24"/>
+  <rect x="226" y="201" fill="#6E6E39" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="1" y="226" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="26" y="226" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="51" y="226" width="24" height="24"/>
+  <rect fill="url(#purple_region)" x="76" y="226" width="24" height="24"/>
+  <rect x="101" y="226" fill="#6E6E39" width="24" height="24"/>
+  <circle fill="#EEEE00" cx="113" cy="238" r="8.4"/>
+  <rect x="126" y="226" fill="#6E6E39" width="24" height="24"/>
+  <rect x="151" y="226" fill="#6E6E39" width="24" height="24"/>
+  <rect x="176" y="226" fill="#6E6E39" width="24" height="24"/>
+  <rect x="201" y="226" fill="#6E6E39" width="24" height="24"/>
+  <rect x="226" y="226" fill="#6E6E39" width="24" height="24"/>
+  <path fill="none" stroke="#FF0000" stroke-width="8.4" stroke-linecap="round" d="M138,63V38h25h25h25v25"/>
+  <path fill="none" stroke="#EEEE00" stroke-width="8.4" stroke-linecap="round" d="M63,113V88H38H13V63V38V13h25h25h25h25h25h25h25
+	                                                                          h25h25v25v25v25v25v25v25v25v25v25h-25h-25h-25h-25h-25"/>
+  <path fill="none" stroke="#0000FF" stroke-width="8.4" stroke-linecap="round" d="M113,213h25h25h25h25v-25"/>
+    
+  </g>
+  
+</svg>

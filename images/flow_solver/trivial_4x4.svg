@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="253" height="253">
+  <rect width="253" height="253" style="fill: #7b7c41;" />
+  <rect x="1" y="1" width="62" height="62" style="fill: #723939;" />
+  <circle cx="32" cy="32" r="21.7" style="fill: #ff0000;" />
+  <rect x="64" y="1" width="62" height="62" style="fill: #723939;" />
+  <rect x="127" y="1" width="62" height="62" style="fill: #723939;" />
+  <rect x="190" y="1" width="62" height="62" style="fill: #000000;" />
+  <rect x="1" y="64" width="62" height="62" style="fill: #393972;" />
+  <circle cx="32" cy="95" r="21.7" style="fill: #0000ff;" />
+  <rect x="64" y="64" width="62" height="62" style="fill: #000000;" />
+  <rect x="127" y="64" width="62" height="62" style="fill: #6e6e39;" />
+  <circle cx="158" cy="95" r="21.7" style="fill: #eeee00;" />
+  <rect x="190" y="64" width="62" height="62" style="fill: #000000;" />
+  <rect x="1" y="127" width="62" height="62" style="fill: #000000;" />
+  <rect x="64" y="127" width="62" height="62" style="fill: #000000;" />
+  <circle cx="95" cy="158" r="21.7" style="fill: #eeee00;" />
+  <rect x="127" y="127" width="62" height="62" style="fill: #000000;" />
+  <circle cx="158" cy="158" r="21.7" style="fill: #0000ff;" />
+  <rect x="190" y="127" width="62" height="62" style="fill: #000000;" />
+  <rect x="1" y="190" width="62" height="62" style="fill: #000000;" />
+  <rect x="64" y="190" width="62" height="62" style="fill: #000000;" />
+  <rect x="127" y="190" width="62" height="62" style="fill: #000000;" />
+  <rect x="190" y="190" width="62" height="62" style="fill: #000000;" />
+  <circle cx="221" cy="221" r="21.7" style="fill: #ff0000;" />
+  <path d="M 158,32 h -63 h -63  " style="stroke: #ff0000; stroke-width: 21.7; fill: none; stroke-linecap: round" />
+</svg>
