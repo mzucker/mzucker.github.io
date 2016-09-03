@@ -385,7 +385,6 @@ Appendix: experimental data
 |=== 
 {: }
 
-
 [^1]: Code sizes computed using David A. Wheeler's SLOCCount.
 
 [^2]: Not exactly an apples-to-apples comparison. The C version emits SVGs (Python doesn't), and has a lot more debugging and visualization features in general. But still.
