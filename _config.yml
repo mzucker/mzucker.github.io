@@ -19,3 +19,14 @@ markdown: kramdown
 
 # Google services
 google_analytics: UA-82495353-1
+
+gems:
+  - jekyll-seo-tag
+
+twitter:
+  username: matt_zucker
+
+logo: /images/nclogo.png
+
+author:
+  twitter: matt_zucker

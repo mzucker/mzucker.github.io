@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Flow Free redux: eating SAT-flavored crow"
+image: /images/flow-sat/cycles-again.png
 ---
 
 Turns out, sometimes a hammer is *not* the best tool for the job.
