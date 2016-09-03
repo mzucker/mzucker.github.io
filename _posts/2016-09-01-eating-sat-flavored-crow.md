@@ -188,7 +188,7 @@ $$(x_{i,u})$$. We can also specify that none of the other colors are
 present, so $$( \lnot x_{i,v} )$$ for all $$v \ne u$$. 
 
 **Every endpoint cell has exactly one neighbor which matches its
-color.** This is the neigbor through which a flow originates or
+color.** This is the neighbor through which a flow originates or
 terminates.  Let us assume endpoint cell $$i$$ has known color $$u$$
 and neighbor cells $$j$$, $$k$$, $$l$$, and $$m$$. Since at least one
 neighbor of the cell has color $$u$$, we can write the clause
@@ -272,7 +272,7 @@ and about $$6 N$$ direction type variables, with $$O(NC^2)$$ clauses
 over just the color variables and an additional $$O(NC)$$ clauses for
 direction-color interactions. You may recall that SAT runtimes are, in
 the worst case, exponential in the number of variables. Should we be
-worried about prohibatively slow solution speeds?
+worried about prohibitively slow solution speeds?
 [*Spoiler alert:*](#conclusions) nope.
 
 Dealing with cycles
