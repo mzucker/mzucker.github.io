@@ -45,11 +45,12 @@ relationships between packages can be represented in both ways:
 
 ![Dependency resolution as SAT](/images/flow-sat/opium.png){: .center-border }
 
-Indeed in 2013, the Python distribution Anaconda [switched][conda] to
-resolving dependencies using SAT, thanks to developer Ilan
-Schnell. The underlying engine is the C-based [PicoSAT] solver, made
-accessible from Python by Schnell's [pycosat] module. As a warm-up to
-solving the dependency problem, he used pycosat to write a
+Indeed in 2013, the Python distribution [Anaconda]
+switched its [conda] package management tool to [resolving
+dependencies using SAT][condasat], thanks to developer Ilan Schnell. The
+underlying engine is the C-based [PicoSAT] solver, made accessible
+from Python by Schnell's [pycosat] module. As a warm-up to solving the
+dependency problem, he used pycosat to write a
 [Sudoku solver][sudoku], which was a helpful and instructive example
 as I began writing my pycosat-based Flow Free solver.
 
@@ -400,7 +401,9 @@ Appendix: experimental data
 [sat]: https://en.wikipedia.org/wiki/Boolean_satisfiability_problem
 [csp]: https://en.wikipedia.org/wiki/Constraint_satisfaction_problem
 [comments]: https://mzucker.github.io/2016/08/28/flow-solver.html#comment-2864512387
-[conda]: https://www.continuum.io/blog/developer/new-advances-conda-0
+[Anaconda]: https://www.continuum.io/anaconda-overview
+[conda]: http://conda.pydata.org/docs/intro.html
+[condasat]: https://www.continuum.io/blog/developer/new-advances-conda-0
 [DLL hell]: https://en.wikipedia.org/wiki/Dependency_hell
 [pycosat]: https://github.com/ContinuumIO/pycosat
 [PicoSAT]: http://fmv.jku.at/picosat/
