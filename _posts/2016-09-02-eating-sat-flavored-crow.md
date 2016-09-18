@@ -43,7 +43,7 @@ uninstall when a user wants to run some desired piece of software. The
 figures below, from [this paper][OPIUM], show how dependency/conflict
 relationships between packages can be represented in both ways:
 
-![Dependency resolution as SAT](/images/flow-sat/opium.png){: .center-border }
+![Dependency resolution as SAT](/images/flow-sat/opium.png){: .center-image .border }
 
 Indeed in 2013, the Python distribution [Anaconda]
 switched its [conda] package management tool to [resolving
@@ -346,7 +346,7 @@ close off this post with another screen grab of a Facebook exchange
 that I think really captures the learning experience of this week's
 exercise:
 
-![a valuable life lesson](/images/flow-sat/facebook.png){: .center-threequarters-border }
+![a valuable life lesson](/images/flow-sat/facebook.png){: .center-threequarters .border }
 
 Don't get too attached to your hammers, kids!
 

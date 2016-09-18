@@ -22,7 +22,7 @@ curled pages.
 So I decided to write a program that *automatically* turns pictures like the one on
 the left below to the one on the right:
 
-![before and after dewarp](/images/page_dewarp/linguistics_thesis_a_before_after.png){: .center-border }
+![before and after dewarp](/images/page_dewarp/linguistics_thesis_a_before_after.png){: .center-image .border }
 
 As with every project on this blog, the code is
 [up on github](https://github.com/mzucker/page_dewarp). Also feel free
@@ -260,7 +260,7 @@ Here is a rough description of the steps I took.
      [Pillow](http://python-pillow.org/). Again, before and after
      shots:
 
-     ![before and after dewarp](/images/page_dewarp/linguistics_thesis_a_before_after.png){: .center-border }
+     ![before and after dewarp](/images/page_dewarp/linguistics_thesis_a_before_after.png){: .center-image .border }
 
 Results {#results}
 =======
@@ -272,19 +272,19 @@ variety of inputs. Here are the images, along with the program output:
 
 **boston_cooking_a.jpg**:
   
-![before and after dewarp](/images/page_dewarp/boston_cooking_a_before_after.png){: .center-border }
+![before and after dewarp](/images/page_dewarp/boston_cooking_a_before_after.png){: .center-image .border }
 
 **boston_cooking_b.jpg**:
   
-![before and after dewarp](/images/page_dewarp/boston_cooking_b_before_after.png){: .center-border }
+![before and after dewarp](/images/page_dewarp/boston_cooking_b_before_after.png){: .center-image .border }
 
 **linguistics_thesis_a.jpg**:
   
-![before and after dewarp](/images/page_dewarp/linguistics_thesis_a_before_after.png){: .center-border }
+![before and after dewarp](/images/page_dewarp/linguistics_thesis_a_before_after.png){: .center-image .border }
 
 **linguistics_thesis_b.jpg**:
   
-![before and after dewarp](/images/page_dewarp/linguistics_thesis_b_before_after.png){: .center-border }
+![before and after dewarp](/images/page_dewarp/linguistics_thesis_b_before_after.png){: .center-image .border }
 
 I also compiled some statistics about each program run (take the
 runtimes with a grain of salt, this is for a single run on my 2012

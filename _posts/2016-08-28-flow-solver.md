@@ -418,7 +418,7 @@ run `flow_solver --help` to see them all.
 Also, as I was preparing to write up this post, this happened on Facebook:
 
 ![oooh pretty output](/images/flow_solver/facebook.png){:
- .center-threequarters-border }
+ .center-threequarters .border }
 
 I want to say I was half-correct in my reply there -- since I posted
 that last comment, I've gotten plenty of "replay value" out of
