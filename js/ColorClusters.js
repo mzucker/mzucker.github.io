@@ -3,10 +3,12 @@ var ColorClusters = function( element_id, points_json ) {
   this.isInitialized = false;
   this.renderer = null;
   this.scene = null;
+  this.rings_scene = null;
   this.camera = null;
   this.points = null;
   this.rings_group = null;
   this.lines_group = null;
+  this.controls = null;
 
   var scope = this;
 
@@ -21,10 +23,27 @@ var ColorClusters = function( element_id, points_json ) {
       }
     }
 
+    scope.renderer.clear();
     scope.renderer.render( scope.scene, scope.camera );
+    scope.renderer.render( scope.rings_scene, scope.camera );
 
   }
 
+  this.animate = function() {
+
+    if (scope.controls.autoRotate) {
+      scope.controls.update();
+      requestAnimationFrame(scope.animate);
+    }
+    
+  }
+
+  this.haltAnimation = function() {
+
+    scope.controls.autoRotate = false;
+
+  }
+  
   this.onLoad = function( response ) {
     
     response = JSON.parse(response);
@@ -75,7 +94,7 @@ var ColorClusters = function( element_id, points_json ) {
     scope.rings_group = new THREE.Group();
 
     scope.scene.add(scope.lines_group);
-    scope.scene.add(scope.rings_group);
+    scope.rings_scene.add(scope.rings_group);
     
     for (var i=0; i<response.segments.length; ++i) {
 
@@ -152,8 +171,15 @@ var ColorClusters = function( element_id, points_json ) {
   this.onKeyDown = function( event ) {
 
     switch (event.key.toLowerCase()) {
+    case "a":
+      scope.controls.autoRotate = !scope.controls.autoRotate;
+      if (scope.controls.autoRotate) {
+        scope.animate();
+      }
+      break;
     case "r":
       scope.controls.reset();
+      scope.controls.autoRotate = false;
       if (!scope.rings_group.visible &&
           !scope.points.visible &&
           !scope.lines_group.visible) {
@@ -199,8 +225,10 @@ var ColorClusters = function( element_id, points_json ) {
   scope.renderer.setClearColor( 0xffffff );
   scope.renderer.setPixelRatio( window.devicePixelRatio );
   scope.renderer.setSize( canvas.clientWidth, canvas.clientHeight );
+  scope.renderer.autoClear = false;
 
   scope.scene = new THREE.Scene();
+  scope.rings_scene = new THREE.Scene();
   
   var aspect = canvas.clientWidth * 1.0 / canvas.clientHeight;
   
@@ -211,6 +239,7 @@ var ColorClusters = function( element_id, points_json ) {
                                            scope.renderer.domElement);
   
   scope.controls.addEventListener('change', scope.render);
+  scope.controls.autoRotateSpeed = 6.0;
   scope.controls.enablePan = false;
   scope.controls.enableZoom = false;
 

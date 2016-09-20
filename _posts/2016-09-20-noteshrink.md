@@ -284,7 +284,8 @@ related colors:
 
 *Note: on browsers supporting WebGL, the plot above is an interactive
  3D diagram powered by [three.js]. Try clicking and dragging to
- rotate. You can also hit the* `r` *key to reset the camera.*
+ rotate; use the* `a` *key to toggle spinning animation or* `r` *to
+ reset the camera.*
  
 [three.js]: http://threejs.org/ 
 
@@ -321,9 +322,9 @@ seven different clusters on the dataset above:[^7]
 
 ![Notes A1](/images/noteshrink/notesA1_plot.svg){: .canvas3d .border #notesA1 }
 
-*Interactive 3D diagram (in supported browsers). Click and drag to
-rotate;* `r` *resets the camera*, `c`, `l`, *and* `p` *toggle
-visibility of circles, lines, and points, respectively.*
+*Click and drag to rotate;* `a` *toggles spinning animation,* `r`
+*resets the camera,* `c`, `l`, *and* `p` *toggle visibility of
+circles, lines, and points, respectively.*
 
 In this diagram, the points with black outlines represent foreground
 color samples, and the colored lines connect them to their closest
@@ -386,10 +387,10 @@ Here is the visualization of the color clusters:
 
 ![tree plot](/images/noteshrink/tree_plot.svg){: .canvas3d .border #tree }
 
-*Interactive 3D diagram powered by [three.js] (in supported
-browsers). Click and drag to rotate;* `r` *resets the camera*, `c`,
-`l`, *and* `p` *toggle visibility of circles, lines, and points,
-respectively.*
+*Interactive diagram powered by [three.js] (in supported
+browsers). Click and drag to rotate;* `a` *toggles spinning
+animation,* `r` *resets the camera,* `c`, `l`, *and* `p` *toggle
+visibility of circles, lines, and points, respectively.*
 
 The next one ([PDF](/images/noteshrink/notesB.pdf)) required lowering
 the saturation threshold to 0.045 because the blue-gray lines are so
