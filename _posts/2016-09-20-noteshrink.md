@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Compressing and enhancing hand-written notes
-image: /images/noteshrink/notesA1_comparison.png
+image: /images/noteshrink/noteshrink_comparison.png
 ---
 
 I wrote a program to clean up scans of handwritten notes while simultaneously reducing file size.
