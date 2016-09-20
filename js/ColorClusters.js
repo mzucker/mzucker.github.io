@@ -225,7 +225,7 @@ var ColorClusters = function( element_id, points_json, points_only ) {
   replace_me.parentNode.replaceChild(canvas, replace_me);
 
 
-  var caption = document.createElement("p");
+  var caption = document.createElement("span");
   caption.setAttribute("class", "caption");
 
   var make_link = function(id, key) {
@@ -266,9 +266,8 @@ var ColorClusters = function( element_id, points_json, points_only ) {
   }  
     
   var canvas_p = canvas.parentNode;
-  var canvas_pp = canvas_p.parentNode;
 
-  canvas_pp.insertBefore(caption, canvas_p.nextSibling);
+  canvas_p.insertBefore(caption, canvas.nextSibling);
   
   scope.renderer = new THREE.WebGLRenderer( {
     antialias: true,
