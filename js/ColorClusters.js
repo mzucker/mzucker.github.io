@@ -154,6 +154,13 @@ var ColorClusters = function( element_id, points_json ) {
     switch (event.key.toLowerCase()) {
     case "r":
       scope.controls.reset();
+      if (!scope.rings_group.visible &&
+          !scope.points.visible &&
+          !scope.lines_group.visible) {
+        scope.rings_group.visible = true;
+        scope.points.visible = true;
+        scope.lines_group.visible = true;
+      }
       break;
     case "c":
       scope.rings_group.visible = !scope.rings_group.visible;
