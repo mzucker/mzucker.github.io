@@ -151,7 +151,7 @@ Although it bears scant resemblance to the actual scanned page --
 there's no text to be found -- the distribution of colors in the two
 images is pretty much identical. Both are mostly grayish-white, with a
 handful of red, blue, and dark gray pixels. Here are the same 10,000
-pixels, sorted by brightness (e.g. the sum of the R, G, and B
+pixels, sorted by brightness (e.g. the sum of their R, G, and B
 intensities):
 
 ![random pixels, sorted](/images/noteshrink/notesA1_samples_sorted.png){: .center-image .border }
@@ -182,7 +182,7 @@ reducing the bit depth, we are grouping similar pixels into larger
 "bins", which makes it easier to find a strong peak in the data.[^5]
 
 There's a tradeoff here between reliability and precision: small bins
-identify colors more precisely, but bigger bins are much more
+enable finer distinctions of color, but bigger bins are much more
 robust. In the end, I went with 6 bits per channel to identify the
 background color, which seemed like a good sweet spot between the two
 extremes.
@@ -282,11 +282,6 @@ related colors:
 
 ![scan foreground colors](/images/noteshrink/notesA1_points_only.svg){: .canvas3d .border #notesA1pointsonly }
 
-*Note: on browsers supporting WebGL, the plot above is an interactive
- 3D diagram powered by [three.js]. Try clicking and dragging to
- rotate; use the* `a` *key to toggle spinning animation or* `r` *to
- reset the camera.*
- 
 [three.js]: http://threejs.org/ 
 
 Our goal now is to convert the original 24 bit-per-pixel image into an
@@ -301,7 +296,7 @@ to be assigned the same color in the final output image.
 
 To accomplish this goal we will use a data-driven method that
 exploits the "clumpy" nature of the diagram above. Choosing colors
-that correspond to the centers of clumps on the diagram above will
+that correspond to the centers of clusters will
 lead to a set of colors that accurately represents the underlying
 data.  In technical terms, we'll be solving a [color quantization]
 problem (which is itself just a special case of
@@ -321,10 +316,6 @@ seven different clusters on the dataset above:[^7]
 [^7]: Why *k*=7 and not 8? We want 8 colors in the final image, and we already have identified a background color...
 
 ![Notes A1](/images/noteshrink/notesA1_plot.svg){: .canvas3d .border #notesA1 }
-
-*Click and drag to rotate;* `a` *toggles spinning animation,* `r`
-*resets the camera,* `c`, `l`, *and* `p` *toggle visibility of
-circles, lines, and points, respectively.*
 
 In this diagram, the points with black outlines represent foreground
 color samples, and the colored lines connect them to their closest
@@ -360,7 +351,7 @@ automatically run [PNG optimization] tools such as [optipng],
 [pngcrush]: http://pmt.sourceforge.net/pngcrush/
 [pngquant]: https://pngquant.org/
 
-The program can automatically combine several output images together
+The program's final output combines several output images together
 into PDFs like [this one] using ImageMagick's [convert] tool.  As a
 further bonus, `noteshrink.py` automatically sorts input filenames
 numerically (as opposed to alphabetically, as the shell [globbing]
@@ -386,11 +377,6 @@ threshold settings:
 Here is the visualization of the color clusters:
 
 ![tree plot](/images/noteshrink/tree_plot.svg){: .canvas3d .border #tree }
-
-*Interactive diagram powered by [three.js] (in supported
-browsers). Click and drag to rotate;* `a` *toggles spinning
-animation,* `r` *resets the camera,* `c`, `l`, *and* `p` *toggle
-visibility of circles, lines, and points, respectively.*
 
 The next one ([PDF](/images/noteshrink/notesB.pdf)) required lowering
 the saturation threshold to 0.045 because the blue-gray lines are so
@@ -436,12 +422,12 @@ exact approach. Oh well.
 You could also try using [expectation maximization] to form a
 [Gaussian mixture model] describing the color distribution -- not sure
 if that's been done much in the past. Other fun ideas include trying
-out a "perceptually uniform" colorspace like [Lab] to cluster in, and
+out a "perceptually uniform" colorspace like [L\*a\*b\*][Lab] to cluster in, and
 also to attempt to automatically determine the
 ["best" number of clusters][bestk] for a given image.
 
 On the other hand, I've got a backlog of blog entries to shove out the
-door, so I'm going to put a pin in this for now, and invite you to go
+door, so I'm going to put a pin in this project for now, and invite you to go
 checkout the `noteshrink.py` [github] repository. Until next time!
 
 [spectral clustering]: https://en.wikipedia.org/wiki/Spectral_clustering
@@ -459,11 +445,11 @@ checkout the `noteshrink.py` [github] repository. Until next time!
 <script src="/js/OrbitControls.js"></script>
 <script src="/js/ColorClusters.js"></script>
 <script>
-    var c1 = new ColorClusters("notesA1pointsonly", "/images/noteshrink/notesA1_points_only.json");
+    var c1 = new ColorClusters("notesA1pointsonly", "/images/noteshrink/notesA1_points_only.json", true);
     var c2 = new ColorClusters("notesA1", "/images/noteshrink/notesA1_points.json");
     var c4 = new ColorClusters("tree", "/images/noteshrink/tree_points.json");
     var c4 = new ColorClusters("notesB1", "/images/noteshrink/notesB1_points.json");
-    var c4 = new ColorClusters("engr", "/images/noteshrink/engr_points.json");
+    var c5 = new ColorClusters("engr", "/images/noteshrink/engr_points.json");
 </script>
 
 {%endraw%}

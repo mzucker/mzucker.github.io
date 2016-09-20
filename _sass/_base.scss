@@ -277,3 +277,15 @@ thead tr {
 tr:nth-child(even) {
     background-color: #eee;
 }
+
+p.caption {
+    font-style: italic;
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: $small-font-size;
+}
+
+p.caption code {
+    font-style: normal;        
+}

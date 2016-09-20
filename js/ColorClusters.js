@@ -1,4 +1,4 @@
-var ColorClusters = function( element_id, points_json ) {
+var ColorClusters = function( element_id, points_json, points_only ) {
 
   this.isInitialized = false;
   this.renderer = null;
@@ -178,6 +178,7 @@ var ColorClusters = function( element_id, points_json ) {
       }
       break;
     case "r":
+
       scope.controls.reset();
       scope.controls.autoRotate = false;
       if (!scope.rings_group.visible &&
@@ -187,6 +188,7 @@ var ColorClusters = function( element_id, points_json ) {
         scope.points.visible = true;
         scope.lines_group.visible = true;
       }
+
       break;
     case "c":
       scope.rings_group.visible = !scope.rings_group.visible;
@@ -208,6 +210,7 @@ var ColorClusters = function( element_id, points_json ) {
   }
 
   var replace_me = document.getElementById(element_id);
+
   
   var canvas = document.createElement("canvas");
   canvas.setAttribute("id", element_id);
@@ -216,7 +219,56 @@ var ColorClusters = function( element_id, points_json ) {
     canvas.setAttribute("class", replace_me.getAttribute("class"));
   }
   
+  
+
+
   replace_me.parentNode.replaceChild(canvas, replace_me);
+
+
+  var caption = document.createElement("p");
+  caption.setAttribute("class", "caption");
+
+  var make_link = function(id, key) {
+    return '<a href="#" id="' + element_id + '_' + id + '"><code>' + key + '</code></a>';
+  }
+
+  var html_str = 'Interactive 3D plot powered by ' +
+      '<a href="http://threejs.org/">three.js</a>. Click and drag to rotate; ' +
+      make_link("animate", "a") + '&nbsp;' +
+      'toggles spinning animation, ' +
+      make_link("rotate", "r") + '&nbsp;' +
+      'resets rotation. '
+
+  if (!points_only) {
+    html_str += 'Use ' + make_link("points", "p") + ',&nbsp;' +
+      make_link("circles", "c") + ',&nbsp;and&nbsp;' +
+      make_link("lines", "l") + 'to toggle visibility of ' +
+      'points, circles, and lines.';
+  }
+  
+  caption.innerHTML = html_str;
+
+  var link_key = function(id, key) {
+    var a = caption.querySelector('#' + element_id + '_' + id);
+    a.onclick = function() {
+      scope.onKeyDown({key: key});
+      return false;
+    }
+  }
+
+  link_key("animate", "a");
+  link_key("rotate", "r");
+
+  if (!points_only) {
+    link_key("points", "p");
+    link_key("circles", "c");
+    link_key("lines", "l");
+  }  
+    
+  var canvas_p = canvas.parentNode;
+  var canvas_pp = canvas_p.parentNode;
+
+  canvas_pp.insertBefore(caption, canvas_p.nextSibling);
   
   scope.renderer = new THREE.WebGLRenderer( {
     antialias: true,
