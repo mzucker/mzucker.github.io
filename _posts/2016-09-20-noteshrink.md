@@ -255,7 +255,7 @@ and saturation:
 |==
 
 As you might expect, white, black, and gray vary significantly in
-value, but share similarly low saturation levels; much higher than
+value, but share similarly low saturation levels -- well below 
 either red or pink. With the additional information provided by HSV,
 we can successfully mark a pixel as belonging to the foreground if
 either one of these criteria holds:
