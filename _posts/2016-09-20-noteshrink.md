@@ -13,8 +13,10 @@ Example input and output:
 
 ![input/output comparison](/images/noteshrink/notesA1_comparison.png){: .center-image }
 
-*Left:* original scan @ 300 DPI, 7.2MB PNG / 790KB JPG. *Right:*
-output @ same resolution, 121KB PNG.
+*Left:* input scan @ 300 DPI, 7.2MB PNG / 790KB JPG. *Right:*
+output @ same resolution, 121KB PNG.[^1]
+
+[^1]: Handwritten note samples are presented with the generous permission of my students Ursula Monaghan and John Larkin.
 
 *Disclaimer:* the process described here is more or less what the
 [Office Lens] app does already, and there's probably any number of
@@ -58,12 +60,12 @@ We start out with a scan of a lovely page of student notes like this one:
 [![a page of notes](/images/noteshrink/notesA1.jpg){: .center-half .border }](/images/noteshrink/notesA1.jpg)
 
 The original PNG image scanned at 300 DPI is about 7.2MB; the same
-image converted to a JPG at quality level 85 is about 790KB.[^1] Since
+image converted to a JPG at quality level 85 is about 790KB.[^2] Since
 PDFs of scans are typically just a [container format][dcf] around PNG
 or JPG, we certainly don't expect to *reduce* the required storage
 size when converting to PDF. 800KB per page is pretty hefty -- for the
 sake of loading times, I'd love to see things closer to
-100KB/page.[^2]
+100KB/page.[^3]
 
 Although this student is a very neat note-taker, the scan shown above
 looks a bit messy (through no fault of her own). There's lots of
@@ -79,9 +81,9 @@ It's a comparatively tiny PNG file, weighing in at just 121KB. My
 favorite part? Not only did the image get *smaller*, it also got
 *clearer*!
 
-[^1]: The image shown here is actually downsampled to 150 DPI to allow the page to load faster.
+[^2]: The image shown here is actually downsampled to 150 DPI to allow the page to load faster.
 
-[^2]: One thing our copier *does* do well is keep PDF sizes down -- it gets about 50-75 KB/page for these types of documents.
+[^3]: One thing our copier *does* do well is keep PDF sizes down -- it gets about 50-75 KB/page for these types of documents.
 
 [dcf]: https://en.wikipedia.org/wiki/Digital_container_format
 
@@ -101,12 +103,12 @@ Before we delve into each one of these steps, it might be useful to
 recap *how* color images are stored digitally. Because humans have
 three different types of color-sensitive cells in their eyes, we can
 reconstruct any color by combining various intensities of red, green,
-and blue light.[^3] The resulting system equates colors with 3D
-points in the [RGB colorspace], illustrated here:[^4]
+and blue light.[^4] The resulting system equates colors with 3D
+points in the [RGB colorspace], illustrated here:[^5]
 
 [![RGB color cube](/images/noteshrink/RGB_color_cube.svg)](https://commons.wikimedia.org/wiki/File:RGB_color_cube.svg){: .center-image }
 
-[^4]: Image courtesy Wikimedia Commons user Maklaan. License: CC BY-SA 3.0
+[^5]: Image courtesy Wikimedia Commons user Maklaan. License: CC BY-SA 3.0
 
 
 Although a true vector space would allow an infinite number of
@@ -117,7 +119,7 @@ in an image analogously to points in a continuous 3D space provides
 powerful tools for analysis, as we shall see when we step through the
 process outlined above.
 
-[^3]: This makes red, green, and blue the *additive primary colors*. Your elementary school art teacher may have told you that the primary colors are red, yellow and blue. This is a [lie](https://en.wikipedia.org/wiki/Lie-to-children); however, there are three *subtractive primary colors*: cyan, yellow, and magenta. The additive primaries relate to combining *light* (which is what monitors emit), whereas the subtractive colors relate to combining *pigment* found in inks and dyes. 
+[^4]: This makes red, green, and blue the *additive primary colors*. Your elementary school art teacher may have told you that the primary colors are red, yellow and blue. This is a [lie](https://en.wikipedia.org/wiki/Lie-to-children); however, there are three *subtractive primary colors*: cyan, yellow, and magenta. The additive primaries relate to combining *light* (which is what monitors emit), whereas the subtractive colors relate to combining *pigment* found in inks and dyes. 
 
 
 
@@ -179,7 +181,7 @@ from 8 bits per channel to 4 by zeroing out the four
 Now the most frequently occurring color has RGB value (224, 224, 224),
 and accounts for 3,623 (36%) of the sampled pixels. Essentially, by
 reducing the bit depth, we are grouping similar pixels into larger
-"bins", which makes it easier to find a strong peak in the data.[^5]
+"bins", which makes it easier to find a strong peak in the data.[^6]
 
 There's a tradeoff here between reliability and precision: small bins
 enable finer distinctions of color, but bigger bins are much more
@@ -187,7 +189,7 @@ robust. In the end, I went with 6 bits per channel to identify the
 background color, which seemed like a good sweet spot between the two
 extremes.
 
-[^5]: Check out the "tips" example in Wikipedia's [histogram article][hexample] for another illustration of why increasing the bin size helps.
+[^6]: Check out the "tips" example in Wikipedia's [histogram article][hexample] for another illustration of why increasing the bin size helps.
 
 [hexample]: https://en.wikipedia.org/wiki/Histogram#Examples
 
@@ -225,11 +227,11 @@ foreground would necessarily also have to include the bleed-through.
 
 We can get around this issue by moving from RGB space to
 [Hue-Saturation-Value][HSV] (HSV) space, which deforms the RGB cube
-into the cylindrical shape illustrated in this cutaway view:[^6]
+into the cylindrical shape illustrated in this cutaway view:[^7]
 
 [![diagram of HSV space](/images/noteshrink/hsv.png)](https://commons.wikimedia.org/wiki/File:HSV_color_solid_cylinder.png){: .center-half}
 
-[^6]: Image courtesy Wikimedia Commons user SharkD. License: CC BY-SA 3.0
+[^7]: Image courtesy Wikimedia Commons user SharkD. License: CC BY-SA 3.0
 [HSV]: https://en.wikipedia.org/wiki/HSL_and_HSV
 
 The HSV cylinder features a rainbow of colors distributed circularly
@@ -310,10 +312,10 @@ The particular methodological tool for the job that I picked is
 [*k*-means clustering][kmeans]. Its overall goal is to find a set of
 means or centers which minimizes the average distance from each point
 to the nearest center. Here's what you get when you use it to pick out
-seven different clusters on the dataset above:[^7]
+seven different clusters on the dataset above:[^8]
 
 [kmeans]: https://en.wikipedia.org/wiki/K-means_clustering
-[^7]: Why *k*=7 and not 8? We want 8 colors in the final image, and we already have identified a background color...
+[^8]: Why *k*=7 and not 8? We want 8 colors in the final image, and we already have identified a background color...
 
 ![Notes A1](/images/noteshrink/notesA1_plot.svg){: .canvas3d .border #notesA1 }
 
@@ -355,14 +357,14 @@ The program's final output combines several output images together
 into PDFs like [this one] using ImageMagick's [convert] tool.  As a
 further bonus, `noteshrink.py` automatically sorts input filenames
 numerically (as opposed to alphabetically, as the shell [globbing]
-operator does).  This is helpful when your dumb scanning program[^8]
+operator does).  This is helpful when your dumb scanning program[^9]
 produces output filenames like `scan 9.png` and `scan 10.png`, and you
 don't want their order to be swapped in the PDF.
 
 [this one]: /images/noteshrink/notesA.pdf
 [convert]: http://www.imagemagick.org/script/convert.php
 [globbing]: https://en.wikipedia.org/wiki/Glob_(programming)
-[^8]: Yes, I'm glaring at you, Mac OS [Image Capture](https://support.apple.com/en-us/HT204790)...
+[^9]: Yes, I'm glaring at you, Mac OS [Image Capture](https://support.apple.com/en-us/HT204790)...
 
 
 Results {#results}
