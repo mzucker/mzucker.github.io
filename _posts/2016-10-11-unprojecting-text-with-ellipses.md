@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Unprojecting text with ellipses
+image: /images/unproject_text/example0_ellipses.png
 ---
 
 Using transformed ellipses to estimate perspective transformations of text.
