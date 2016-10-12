@@ -291,3 +291,21 @@ span.caption {
 .caption code {
     font-style: normal;        
 }
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.video-container iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
