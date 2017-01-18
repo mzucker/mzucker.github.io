@@ -31,6 +31,8 @@ the set of figures I lovingly created, pixel-by-pixel, in MS Paint, like this on
 
 ![oooh, MS paint, looks totally professional](/html/images/repeatposneg.png){: .center-image}
 
+The motivation for unearthing this piece was a request from a programmer in the process of assembling his own documentation on the topic, who found it helpful despite its age. 
+
 I had fun going back and rereading it. Hope you enjoy it, too!
 
 [pertut]: /html/perlin-noise-math-faq.html
