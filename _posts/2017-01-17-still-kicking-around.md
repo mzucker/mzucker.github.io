@@ -37,7 +37,7 @@ I had fun going back and rereading it. Hope you enjoy it, too!
 
 [pertut]: /html/perlin-noise-math-faq.html
 [iqarticles]: http://www.iquilezles.org/www/index.htm
-[iqdemo]: https://www.shadertoy.com/view/lsf3WH
+[iqdemo]: https://www.shadertoy.com/view/XdXGW8
 [wikiperlin]: https://en.wikipedia.org/wiki/Perlin_noise
 [scholarcites]: https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7011207279814202455
 
