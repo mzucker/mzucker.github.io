@@ -31,7 +31,7 @@ the set of figures I lovingly created, pixel-by-pixel, in MS Paint, like this on
 
 ![oooh, MS paint, looks totally professional](/html/images/repeatposneg.png){: .center-image}
 
-The motivation for unearthing this piece was a request from a programmer in the process of assembling his own documentation on the topic, who found it helpful despite its age. 
+The motivation for unearthing this piece was a request from a programmer in the process of assembling [his own documentation][lars] on the topic, who found it helpful despite its age. 
 
 I had fun going back and rereading it. Hope you enjoy it, too!
 
@@ -40,5 +40,6 @@ I had fun going back and rereading it. Hope you enjoy it, too!
 [iqdemo]: https://www.shadertoy.com/view/XdXGW8
 [wikiperlin]: https://en.wikipedia.org/wiki/Perlin_noise
 [scholarcites]: https://scholar.google.com/scholar?oi=bibs&hl=en&cites=7011207279814202455
+[lars]: http://www.huttar.net/lars-kathy/graphics/perlin-noise/perlin-noise.html
 
 [^1]: I didn't add the link myself, I swear! In fact, the archived copy seems to be from a mirror based out of Linköping University in Sweden. Who'd have guessed?
