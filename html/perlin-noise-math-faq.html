@@ -1,0 +1,488 @@
+<html>
+  <head><title>The Perlin noise math FAQ</title></head>
+  <body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+    <h1>The Perlin noise math FAQ</h1>
+    <h2>by <a href="/">Matt Zucker</a></h2>
+    
+    <i>v. 1.0, last updated February 2001</i><p>
+
+        <table bgcolor="#ffff00">
+            <tr>
+                <td>
+                    <b>Disclaimer:</b>
+
+                    This document is glaringly outdated (note last
+                    update above) and is presented primarily for
+                    historical interest, because other archived copies
+                    have begun to disappear.  While I'm not aware of
+                    are any glaring inaccuracies, it's certainly not
+                    the document I would write now if I wanted to
+                    present a modern tutorial on procedural noise for
+                    graphics.<p>
+                    
+                    Turns out that 20-year-old me had some significant
+                        conceptual gaps, for instance the relationship
+                        between the "ease curve" discussed below and
+                        the <a href="https://en.wikipedia.org/wiki/Cubic_Hermite_spline">cubic hermite spline</a> that underlies the GLSL <a href="https://www.opengl.org/sdk/docs/man/html/smoothstep.xhtml">smoothstep</a> function.<p>
+
+                    Many of the links below are broken, follow at your own risk.<p>
+
+                        If you're interested in a more modern take on these topics,
+                        a great place to start would be Inigo Quilez's <a href="http://www.iquilezles.org/www/index.htm">articles</a> and <a href="https://www.shadertoy.com/view/lsf3WH">shadertoy</a> <a href="https://www.shadertoy.com/view/XdXGW8">examples</a>.
+                    
+                </td>
+            </tr>
+        </table>
+    
+    <hr noshade><p>
+    
+    <h3>Table of Contents</h3>
+    <ul type=square>
+    <li><a name="toc-about" href="#about">About this document</a><br>
+    <li><a name="toc-whatsnoise" href="#whatsnoise">What is Perlin noise?</a><br>
+    <li><a name="toc-algorithm" href="#algorithm">How do you generate Perlin noise?</a><br>
+    <li><a name="toc-computation" href="#computation">Computational complexity</a><br>
+    <li><a name="toc-speed" href="#speed">Speeding it up</a><br>
+    <li><a name="toc-loop" href="#loop">Looping noise</a><br>
+    <li><a name="toc-tile" href="#tile">Seamlessly tiling noise</a><br>
+    </ul><p>
+    <hr noshade>
+    
+    <h3><a name="about" href="#toc-about">About this document</a></h3>
+    So far, I have found two really great sources for information about Perlin noise.
+    They are Ken Perlin's <a href="http://www.noisemachine.com/talk1/">Making Noise</a>
+    web site, which has a comprehensive introduction to the topic, and
+    <a href="http://freespace.virgin.net/hugo.elias/models/m_perlin.htm">Hugo Elias's page</a>,
+    which features some algorithms and a few more detailed examples
+    of applications.  This document is intended to complement those
+    two valuable resources by explaining in more depth, hopefully in plain English,
+    some of the math involved in Ken Perlin's 
+    <a href="http://www.mrl.nyu.edu/~perlin/doc/oscar.html#noise">original implementation</a>
+    of Perlin noise.<p>
+    
+    I wrote a demo program in C++ that includes a Perlin noise texture class,
+    which I hope provides a decent example of C++ code for Perlin noise.  You
+    can find the demo at
+    <a href="http://www.robo-murito.net/code.html">http://www.robo-murito.net/code.html</a>.<p>
+    
+    <hr noshade>
+
+    <h3><a name="whatsnoise" href="#toc-whatsnoise">What is Perlin noise?</a></h3>
+
+    Perlin noise is function for generating coherent noise over a space.
+    <i>Coherent</i> noise means that for any two points in the space, the value 
+    of the noise function changes smoothly as you move from one point to
+    the other -- that is, there are no discontinuities.<p>
+    
+    <center>
+    <img src="images/noncoherent.gif" width=128 height=128><img
+     src="images/coherent.gif" width=128 height=128><br>
+    <i>Non-coherent noise (left) and Perlin noise (right)</i></center><p>
+
+    When I talk about a noise function, I mean a function that takes a coordinate 
+    in some space and maps it to a real number between -1 and 1.  Note that
+    you can make noise functions for any arbitrary dimension.  The noise functions
+    above are 2-dimensional, but you can graph a 1-dimensional noise function
+    just like you would graph any old function of one variable, or consider
+    noise functions returning a real number for every point in a 3D space.<p>
+    
+    These images were all created using nothing but Perlin noise:<p>
+    
+    <center>
+    <img src="images/woodgrain.gif" width=128 height=128 hspace=15>
+    <img src="images/marble.gif" width=128 height=128 hspace=15>
+    <img src="images/clouds.gif" width=128 height=128 hspace=15>
+    </center></p>
+    
+    Besides these trivial images, there are countless interesting applications 
+    for noise in computer graphics. Look at
+    <a href="http://freespace.virgin.net/hugo.elias/models/m_perlin.htm">Hugo Elias' page</a>
+    or <a href="http://www.noisemachine.com/talk1/">Ken Perlin's pages</a>
+    for some pretty examples, in-depth explanations and nifty ideas.<p>
+
+    <hr noshade>
+    
+    <h3><a name="algorithm" href="#toc-algorithm">How do you generate Perlin noise?</a></h3>
+    I've seen implementations on the internet that take non-coherent noise,
+    as shown above, and smooth it (with something like a blur function) 
+    so it becomes coherent noise, but that can end up being more
+    computationally expensive than the function I'll present here, which
+    is more or less the 
+    <a href="http://www.mrl.nyu.edu/~perlin/doc/oscar.html#noise">original implementation</a>
+    that Ken Perlin came up with.
+    The problem with Perlin's implementation on its own was that
+    that reading the descriptions of the math published on 
+    Perlin's website was a bit like reading Greek -- it took me about a
+    week of reading his code and notes to figure out the actual geometric
+    interpretations of the math.  So hopefully this document
+    can trim down that learning curve.<p>
+    
+    Let's look at the 2D case, where
+    we have the function
+    <blockquote><i>noise2d</i>(<i>x</i>, <i>y</i>) = <i>z</i>,</blockquote>
+    with <i>x</i>, <i>y</i>, and <i>z</i> all real (floating-point) numbers.     
+    We'll define the noise function on a regular grid, where grid points
+    are defined for each whole number, and any number with a fractional
+    part (<i>i.e.</i> 3.14) lies between grid points.  Consider finding
+    the value of <i>noise2d</i>(<i>x</i>, <i>y</i>), with
+    <i>x</i> and <i>y</i> both not whole numbers -- that is, the point
+    (<i>x</i>, <i>y</i>) lies somewhere in the middle of a square in our
+    grid. The first thing we
+    do is look at the gridpoints surrounding (<i>x</i>, <i>y</i>).
+    In the 2D plane, we have 4 of them, which we
+    will call (<i>x</i><sub>0</sub>, <i>y</i><sub>0</sub>), 
+    (<i>x</i><sub>0</sub>, <i>y</i><sub>1</sub>),
+    (<i>x</i><sub>1</sub>, <i>y</i><sub>0</sub>), and
+    (<i>x</i><sub>1</sub>, <i>y</i><sub>1</sub>).<p>
+
+    <center><img src="images/cornergridpoints.gif" height=138 width=148><br>
+    <i>The 4 grid points bounding (x, y)</i></center><p>
+    
+    Now we need a function 
+    <blockquote><i>g</i>(<i>x</i><sub>grid</sub>, <i>y</i><sub>grid</sub>) 
+    = (<i>g</i><sub>x</sub>, <i>g</i><sub>y</sub>)</blockquote>
+    which takes each grid point and assigns
+    it a pseudorandom gradient of length 1 in <b>R</b><sup>2</sup>
+    ('gradient' is just the name for an ordered pair or vector that we think of 
+    as pointing in a particular direction).
+    By <i>pseudorandom</i>,
+    we mean that <i>g</i> has the appearance of randomness, but with the
+    important consideration that it always returns the same gradient for the 
+    same grid point, every time it's calculated.  It's also important that 
+    every direction has an equal chance of being picked.<p>
+    
+    <center><img src="images/gradients.gif" width=246 height=258><br>
+    <i>The 4 pseudorandom gradients associated with the grid points</i></center><p>
+    
+    Also, for each grid point, we generate a vector going from the grid point
+    to (<i>x</i>, <i>y</i>), which is easily calculated by subtracting the
+    grid point from (<i>x</i>, <i>y</i>).<p>
+    
+    <center><img src="images/cornervectors.gif" width=191 height=100><br>
+    <i>Vectors from the grid points to (x, y)</i></center><p>
+    
+    Now we have enough to start calculating the value of the noise function
+    at (<i>x</i>, <i>y</i>).  What we'll do is calculate the influence
+    of each pseudorandom gradient on the final output, and generate
+    our output as a weighted average of those influences.<p>
+    
+    First of all, the influence of each gradient can be calculated by performing
+    a dot product of the gradient and the vector going from its associated grid
+    point to (<i>x</i>, <i>y</i>).  
+    A refresher on the dot product -- remember, it's just the sum of the products
+    of all the components of two vectors, as in
+    
+    <blockquote>
+    (<i>a</i>, <i>b</i>) &middot; (<i>c</i>, <i>d</i>) = 
+    <i>ac</i> + <i>bd</i> .
+    </blockquote>
+
+    Since I'm really tired of writing subscripts, we'll just refer to these
+    4 values as <i>s</i>, <i>t</i>, <i>u</i>, and <i>v</i>, where    
+
+    <blockquote>
+    <i>s</i> = <i>g</i>(<i>x</i><sub>0</sub>, <i>y</i><sub>0</sub>) &middot;
+               ((<i>x</i>, <i>y</i>) - (<i>x</i><sub>0</sub>, <i>y</i><sub>0</sub>)) , <br>
+    
+    <i>t</i> = <i>g</i>(<i>x</i><sub>1</sub>, <i>y</i><sub>0</sub>) &middot;
+               ((<i>x</i>, <i>y</i>) - (<i>x</i><sub>1</sub>, <i>y</i><sub>0</sub>)) , <br>
+
+    <i>u</i> = <i>g</i>(<i>x</i><sub>0</sub>, <i>y</i><sub>1</sub>) &middot;
+               ((<i>x</i>, <i>y</i>) - (<i>x</i><sub>0</sub>, <i>y</i><sub>1</sub>)) , <br>
+
+    <i>v</i> = <i>g</i>(<i>x</i><sub>1</sub>, <i>y</i><sub>1</sub>) &middot;
+               ((<i>x</i>, <i>y</i>) - (<i>x</i><sub>1</sub>, <i>y</i><sub>1</sub>)) .
+    </blockquote>
+
+    So here's a 3D-ish picture of some influences <i>s</i>, <i>t</i>, <i>u</i>, 
+    and <i>v</i> coming out of the <b>R</b><sup>2</sup> plane (note that 
+    these probably wouldn't be the actual values generated by the dot products of 
+    the vectors pictured above).<p>
+    
+    <center><img src="images/zcomponents.gif" width=141 height=83><br>
+    <i>Influences from the grid points</i></center><p>
+    
+    Geometrically, the dot product is proportional to the cosine of the angle
+    between two vectors, though its unclear to me if that geometrical interpretation
+    helps one visualize what's going on.  The important thing to know at this 
+    point is that we have four numbers, <i>s</i>, <i>t</i>, <i>u</i>, and <i>v</i>
+    which are uniquely determined by (<i>x</i>, <i>y</i>) and the 
+    pseudorandom gradient function <i>g</i>.
+    Now we need a way to combine them to get <i>noise2d</i>(<i>x</i>, <i>y</i>),
+    and as I suggested before, some sort of average will do the trick.<p>
+    
+    I'm going to state the obvious here and say that if we want to take an average of 
+    four numbers, what we can actually do is this:
+    <ol>
+      <li>find the average of the first pair of numbers
+      <li>find the average of the second pair of numbers
+      <li>average those two new numbers together
+    </ol>
+    -- and that's the strategy we'll take here.
+    We'll average the "front" values <i>s</i> and <i>t</i> first, then average
+    the "rear" values <i>u</i> and <i>v</i>.  This works to our advantage because
+    the points below <i>s</i> and <i>t</i>, and similarly below <i>u</i> and <i>v</i>
+    vary only in the x dimension -- so we only have to worry about dealing with
+    one dimension at a time.<p>
+
+    We're not taking a plain vanilla-flavored average here, but instead, a 
+    weighted average.  That is, the value of the noise function should be influenced
+    more by <i>s</i> than <i>t</i> when <i>x</i> is closer to <i>x</i><sub>0</sub>
+    than <i>x</i><sub>1</sub> (as is the case in the pictures above).  In fact, it ends
+    up being nice to arrange things so that <i>x</i> and <i>y</i> values behave as if
+    they are slightly closer to one grid point or the other than they actually are
+    because that has a smoothing effect on the final output.  I know that sounds
+    really silly, but noise without this property looks really stupid.  In fact,
+    it sounds so silly that I'm going to write it again: <i>we're going to want
+    the input point to behave as if its closer to one grid point or another than 
+    it actually is</i>.<p>
+
+    This is where we introduce the concept of the ease curve.  The function
+    3<i>p</i>&sup2;&nbsp;-&nbsp;2<i>p</i>&sup3; generates a nice S-shaped curve
+    that has a few characteristics that are good for our purposes.<p>
+    
+    <center><img src="images/scurve.gif" width=108 height=112><br>
+    <i>Meet the ease curve</i></center><p>
+    
+    What the ease curve does is to exaggerate the proximity its input
+    to zero or one. For inputs that are sort of close to zero, it outputs a number
+    <i>really</i> close to zero.  For inputs close to one, it outputs
+    a number <i>really</i> close to one. And when the input is exactly one half,
+    it outputs exactly one half.  Also, it's symmetrical in the sense that it 
+    exaggerates to the same degree on both sides of <i>p</i> = &frac12;.    
+    So if we can treat one grid point as the zero value, and the other as the 
+    one value, the ease curve has the exact smoothing effect that just we 
+    said we wanted.<p>
+    
+    Ok, I've droned on long enough, it's calculation time:
+    first, we take the value of the ease curve
+    at <i>x</i> - <i>x</i><sub>0</sub> to get a weight <i>S</i><sub>x</sub>.    
+    Then we can find the weighted average of <i>s</i> and <i>t</i> by constructing
+    a linear function that maps 0 to <i>s</i> and 1 to <i>t</i>, and evaluating
+    it at our x dimension weight <i>S</i><sub>x</sub>. We'll call this average <i>a</i>.    
+    We'll do the same for <i>u</i> and <i>v</i>, and call the result <i>b</i>.<p>
+
+    <center>
+    <img src="images/calcsx.gif" width=116 height=115 hspace=15>
+    <img src="images/calca.gif" width=108 height=115 hspace=15>
+    <img src="images/calcb.gif" width=107 height=115 hspace=15> <br>
+    <i>Finding the first two averages using linear interpolation</i></center><p>
+
+    The above figures should satisfy you that no matter where <i>x</i> happens
+    to fall in the grid, the final averages will always be between <i>s</i> and
+    <i>t</i>, and <i>u</i> and <i>v</i>, respectively.
+    Mathematically, this is all simple to calculate:
+    <blockquote>
+    <i>S</i><sub>x</sub> = 3(<i>x</i> - <i>x</i><sub>0</sub>)&sup2; - 
+    2(<i>x</i> - <i>x</i><sub>0</sub>)&sup3; <br>
+    <i>a</i> = <i>s</i> + <i>S</i><sub>x</sub>(<i>t</i> - <i>s</i>)<br>
+    <i>b</i> = <i>u</i> + <i>S</i><sub>x</sub>(<i>v</i> - <i>u</i>)
+    </blockquote>
+    
+    Now we find our y dimension weight, <i>S</i><sub>y</sub>,  by
+    evaluating the ease curve at <i>y</i> - <i>y</i><sub>0</sub>,
+    and finally we take a weighted sum of <i>a</i> and <i>b</i> to get 
+    our final output value <i>z</i>.<p>
+    
+    <center>
+    <img src="images/calcsy.gif" width=113 height=115 hspace=15>
+    <img src="images/answer.gif" width=107 height=117 hspace=15> <br>
+    <i>A weighted sum of the first two averages yields the final output</i></center><p>
+    
+    And there you have it.  So all you have to do is call the noise function
+    for every pixel you want to color, and you're done.  Probably.
+    
+    <center>
+    <h3>...and they all lived happpily ever after.</h3>
+    <h1>The End.</h1></center><p>
+    
+    An interesting consequence of all of this is that the noise function becomes
+    zero when <i>x</i> and <i>y</i> are both whole numbers.
+    This is because the vector (<i>x</i>,&nbsp;<i>y</i>) - 
+    (<i>x</i><sub>0</sub>,&nbsp;<i>y</i><sub>0</sub>) will be the zero vector.  
+    Then the dot product of that vector and 
+    <i>g</i>(<i>x</i><sub>0</sub>,&nbsp;<i>y</i><sub>0</sub>)will evaluate
+    to zero, and the weights for the averages will also always be zero, so 
+    that the zero dot product will influence the final answer 100%.  The funny
+    thing is that looking at the noise function, you would never guess that it ends up
+    being zero at regular intervals.<p>
+    
+    <hr noshade>
+    
+    <h3><a name="computation" href="#toc-computation">Computational complexity</a></h3>
+    If you want to extend the noise function to <i>n</i> dimensions, you'll need
+    to consider 2<sup><i>n</i></sup> grid points, and perform 
+    2<sup>(<i>n</i>&nbsp;-&nbsp;1)</sup> weighted sums.  The implementation presented
+    here has a computational complexity of O(2<sup>(<i>n</i>&nbsp;-&nbsp;1)</sup>),
+    which means that you'll really start to drag if you want to look at 5-, 6-, or
+    greater dimensional noises.<p>
+    
+    <hr noshade>
+    
+    <h3><a name="speed" href="#toc-speed">Speeding it up</a></h3>
+    We could increase the speed of the noise function if we didn't have to compute
+    the pseudorandom gradient every time we called the noise function (because for every
+    <i>x</i> between some <i>x</i><sub>0</sub> and <i>x</i><sub>1</sub> and
+    <i>y</i> between some <i>y</i><sub>0</sub> and <i>y</i><sub>1</sub>, we have
+    to recalculate the same four gradients every time the noise function is called!)
+    The nice thing to do would be to precalculate the gradient for every possible
+    (<i>x</i><sub>grid</sub>, <i>y</i><sub>grid</sub>), but 
+    <i>x</i><sub>grid</sub> and <i>y</i><sub>grid</sub> are allowed to 
+    vary all over the real plane! How could we possible precalculate <i>every</i> value?<p>
+ 
+    The neat thing about noise is that it's locally variable, but globally flat --
+    so if we zoom out to a large degree, it will just look like a uniform value
+    (zero in fact).  So, we don't care if the noise function starts to repeat after
+    large intervals, because once you're zoomed out far enough to see the repeat,
+    it all looks totally flat anyways.<p>
+    
+    So now we should feel justified in doing a little trick with modulus.
+    Say we're doing noise in 3D, and we
+    want to find the gradient for some grid point
+    (<i>i</i>,&nbsp;<i>j</i>,&nbsp;<i>k</i>).    
+    Let's precompute a permutation table <i>P</i>, that maps every integer
+    from 0 to 255 to another integer in the same range (possibly even the same number).    
+    Also, let's precompute a table of 256 pseudorandom gradients and put it in
+    <i>G</i>, so that <i>G</i>[<i>n</i>] is some 3-element gradient.<p>
+    
+    Now,  <blockquote>
+    <i>g</i>(<i>i</i>,&nbsp;<i>j</i>,&nbsp;<i>k</i>) = <i>G</i>[
+    ( <i>i</i> + <i>P</i>[ (<i>j</i> + <i>P</i>[<i>k</i>]) mod 256 ] ) mod 256 ]
+    </blockquote>
+    
+    But on a computer, modulus with 256 is the same thing as a bitwise and
+    with 255, which is a very fast operation to perform.  Now we've reduced
+    the problem of a possibly involved function call into nothing but some
+    table lookups and bitwise operations.  Granted, the gradients repeat every 256
+    units in each dimenstion, but as demonstrated, it doesn't matter.<p>
+    
+    This speedup is also mentioned on Perlin's web page, and is actually used in his
+    <a href="http://www.mrl.nyu.edu/~perlin/doc/oscar.html#noise">original implementation</a>.
+    <p>
+   
+    <hr noshade>
+    
+    <h3><a name="loop" href="#toc-loop">Looping noise</a></h3>
+
+    What if you want to use procedural noise to calculate a repeating animation of
+    a licking flame or rolling clouds?  It is true that noise on it's own doesn't
+    tend to repeat discernably, and that's great for generating ever-changing images; 
+    however, if you want to prerender an animation, you'll probably want it to repeat.
+    Given that <i>F</i> is your function that generates a real number from
+    a point in noise-space, and you want your animation to repeat
+    every <i>t</i> units, you define a new function that loops when <i>z</i> is between 
+    0 and <i>t</i>:
+    <blockquote>
+      <i>F</i><sub>loop</sub>(<i>x</i>,&nbsp;<i>y</i>,&nbsp;<i>z</i>) = 
+      ( (<i>t</i> - <i>z</i>) * <i>F</i>(<i>x</i>,&nbsp;<i>y</i>,&nbsp;<i>z</i>) + 
+      (<i>z</i>) * <i>F</i>(<i>x</i>,&nbsp;<i>y</i>,&nbsp;<i>z</i> - <i>t</i>) )
+      / (<i>t</i>)
+    </blockquote>    
+    Now each function call takes twice as long to calculate, but since you're probably
+    not going to use this cycling technique in real time, it probably doesn't matter.<p>
+    
+    <b>The explanation</b><p>
+    Consider
+    the graph of a noise function <i>F</i>(<i>x</i>,&nbsp;<i>y</i>,&nbsp;<i>z</i>) for
+    some fixed <i>x</i> and <i>y</i>.  The problem is, you want <i>F</i>(0) = <i>F</i>(<i>t</i>)
+    and there is no guarantee that will be the case with any old <i>x</i>, <i>y</i>, and <i>t</i>.
+    Actually, since any given <i>x</i> and <i>y</i> should have no influence on the repeating
+    aspect of the animation, we can for all practical purposes throw them out while
+    we're developing our repeating function, and consider the simplified case of
+    a one-dimensional noise function <i>F</i>(<i>z</i>).<p>
+
+    <center><img src="images/repeatorig.gif" width=124 height=110><br>
+    <i>A one-dimensional noise function</i></center><p>
+    
+    We need to take this function and change it into one where it is guaranteed
+    that <i>F</i>(0) = <i>F</i>(<i>t</i>).  Here's an expanded view of our
+    noise function showing its behavior from -<i>t</i> to <i>t</i>:<p>
+    
+    <center><img src="images/repeatposneg.gif" width=219 height=110><br>
+    <i>The same, function, ranging over a positive and negative domain</i></center><p>
+
+    Now we define a new function <i>F</i>'(<i>z</i>) that behaves like <i>F</i>(<i>z</i>)
+    when <i>z</i> is near zero, but behaves like <i>F</i>(<i>z</i> - <i>t</i>) when 
+    <i>z</i> is near <i>t</i>.  If you think about it, you see that 
+    <i>F</i>'(0) = <i>F</i>(0), and that 
+    <i>F</i>'(<i>t</i>) = <i>F</i>(<i>t</i> - <i>t</i>) = <i>F</i>(0).
+    We can do this with a simple linear interpolation by considering a linear function
+    which is equal to <i>F</i>(<i>z</i>) at 0, and equal to <i>F</i>(<i>z</i> - <i>t</i>)
+    at <i>t</i>.<p>
+    
+    High school algebra tells us that this linear function has a slope of 
+    <blockquote>
+      (<i>rise</i>) / (<i>run</i>) = 
+      (<i>F</i>(<i>z</i> - <i>t</i>) - <i>F</i>(<i>z</i>)) /
+      (<i>t</i> - 0) = (<i>F</i>(<i>z</i> - <i>t</i>) - <i>F</i>(<i>z</i>)) / <i>t</i>
+    </blockquote>
+    and an intercept of <i>F</i>(<i>z</i>).  Now we set up <i>F</i>' as this linear 
+    interpolation operating on <i>z</i>:
+    <blockquote>
+    <i>F</i>'(<i>z</i>) = <i>slope</i>(<i>z</i>) + <i>intercept</i><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = ( (<i>F</i>(<i>z</i> - <i>t</i>) - <i>F</i>(<i>z</i>)) / <i>t</i> )(<i>z</i>) + <i>F</i>(<i>z</i>)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = ( ( (<i>z</i>) * <i>F</i>(<i>z</i> - <i>t</i>) - (<i>z</i>) * <i>F</i>(<i>z</i>) ) / <i>t</i> ) + <i>F</i>(<i>z</i>)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = ( ( (<i>z</i>) * <i>F</i>(<i>z</i> - <i>t</i>) - (<i>z</i>) * <i>F</i>(<i>z</i>) ) / <i>t</i> ) + (<i>t</i> / <i>t</i>) * <i>F</i>(<i>z</i>)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = ( (<i>z</i>) * <i>F</i>(<i>z</i> - <i>t</i>) - (<i>z</i>) * <i>F</i>(<i>z</i>) + (<i>t</i>) * <i>F</i>(<i>z</i>)) / (<i>t</i>)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = ( (<i>z</i>) * <i>F</i>(<i>z</i> - <i>t</i>) + (<i>t</i>-<i>z</i>) * <i>F</i>(<i>z</i>) ) / (<i>t</i>)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    = ( (<i>t</i>-<i>z</i>) * <i>F</i>(<i>z</i>) + (<i>z</i>) * <i>F</i>(<i>z</i> - <i>t</i>) ) / (<i>t</i>)<br>
+    </blockquote>
+    Which is basically the same as the function given above.  If you look
+    at <i>F</i>' next to <i>F</i>, you can see that the function does indeed
+    repeat in that <i>F</i>'(0) = <i>F</i>'(<i>t</i>).  Also notice that
+    the peaks just to the right of <i>F</i>'(0) are the same as the peaks just
+    to the right of <i>F</i>'(0), and that the peaks just to the left of
+    <i>F</i>'(<i>t</i>) are virtually identical to the peaks just to the 
+    left of <i>F</i>(<i>0</i>).
+    <p>
+        
+    <center>
+    <img src="images/repeatposneg.gif" width=219 height=110 hspace=15>
+    <img src="images/repeatfinal.gif" width=156 height=110 hspace=15> <br>
+    <i>The old function (left), and the new, repeating function (right)</i>
+    </center><p>
+    
+    If you had a little calculus and too much free time, you could prove that
+    this looping (and the tiling in the next section) is truly seamless:
+    not only does <i>F</i>(0) = <i>F</i>'(<i>t</i>), but all their derivatives
+    should match up as well.  Which means that no one should be able to tell
+    where the repeat actually happens.<p>
+
+    <hr noshade>
+    
+    <h3><a name="tile" href="#toc-tile">Seamlessly tiling noise</a></h3>
+    
+    Say you're using a noise function to generate textures for a polygon-based engine.
+    Chances are, you might want the textures to be tileable.  You can extend the
+    above example to generate
+    tileable 2-dimensional noise that repeats every <i>w</i> units in the x dimension
+    and every <i>h</i> units in the y dimension.  This will require a weighted sum
+    of four calls to the original function (which again, for lack of imagination,
+    we will call <i>F</i>).
+    
+    <blockquote>
+    <i>F</i><sub>tileable</sub>(<i>x</i>,&nbsp;<i>y</i>) = ( <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i>F</i>(<i>x</i>,&nbsp;<i>y</i>) * (<i>w</i> - <i>x</i>) * (<i>h</i> - <i>y</i>) + <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i>F</i>(<i>x</i> - <i>w</i>,&nbsp;<i>y</i>) * (<i>x</i>) * (<i>h</i> - <i>y</i>) + <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i>F</i>(<i>x</i> - <i>w</i>,&nbsp;<i>y</i> - <i>h</i>) * (<i>x</i>) * (<i>y</i>) + <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i>F</i>(<i>x</i>,&nbsp;<i>y</i> - <i>h</i>) * (<i>w</i> - <i>x</i>) * (<i>y</i>)<br>
+    ) / (<i>w</i><i>h</i>)
+    </blockquote>
+    
+    A pattern should be emerging here, so it shouldn't surprise you that you'll need
+    evaluate a weighted sum of 8 calls to the noise function if you want to have
+    a repeating animation that tiles in the x and y dimenstions.  I'm not going to write
+    it out here out of space considerations, and also because it should be evident what 
+    the sum will be.
+  </body>
+</html>
