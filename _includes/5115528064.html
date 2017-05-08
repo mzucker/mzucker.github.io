@@ -1,0 +1,58 @@
+<h1 style="border-top: 1px solid #bbb; margin-top: 24px; padding-top: 24px">Comments</h1>
+<div class="comment">
+<p>Comments are closed, see <a href="/2017/05/08/no-more-disqus.html">here</a> for details.</p>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">richwiss</span> &middot; <span class="comment-date">2016-Sep-03</span>
+</div>
+<div class="comment-body">
+<p>The nice thing about the SAT writeup you've done is that it should be possible to add a few constraints to handle the "Flow Free Bridges" puzzles by specifying the cells that are the bridges and changing your "The flow through every non-endpoint cell matches exactly one of the six direction types" condition into two conditions: "The flow through every non-endpoint/non-bridge cell matches exactly one of the six direction types" and "The flow through every bridge cell matches both the up/down and left/right direction types and no others."</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Sep-03</span>
+</div>
+<div class="comment-body">
+<p>Left as an exercise for the reader :)</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">richwiss</span> &middot; <span class="comment-date">2016-Sep-03</span>
+</div>
+<div class="comment-body">
+<p>But then reader has to figure out your code first. Reader has other things to do :)</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Sep-03</span>
+</div>
+<div class="comment-body">
+<p>Maybe another reader. I think this blog has at least two</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">richwiss</span> &middot; <span class="comment-date">2016-Sep-03</span>
+</div>
+<div class="comment-body">
+<p>You'd also have to relax the "Every cell is assigned a single color" constraint for bridge nodes to be "Every non-bridge cell is assigned a single color" and "Every bridge cell is assigned two colors."</p>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">asmeurer</span> &middot; <span class="comment-date">2016-Sep-03</span>
+</div>
+<div class="comment-body">
+<p>Very nice!</p><p>The solver in conda also works somewhat incrementally, although I'm not sure if it counts as the same thing for the SAT competition. As I mentioned in other comment (<a href="https://mzucker.github.io/2016/08/28/flow-solver.html#comment-2865640186)" rel="nofollow noopener">https://mzucker.github.io/2016...</a>, dependency resolution ends up being an optimization problem (you don't just want to install a satisfiable set of packages, you want to install the newest compatible versions possible). Conda represents the versions of packages installed as a linear integer formula, which is minimized for newer versions. This is converted to SAT via binary decision diagram (BDD) (another method which is also implemented is sorter networks, see "Translating Pseudo-Boolean Constraints into SAT," Eén and Sörensson). It then becomes a matter of bisecting the right-hand side of the equation (regenerating the formula to CNF each time and solving it with the package dependency constraints) until the minimal value is found. This part of conda was written by me in 2014-2015.</p>
+</div>
+</div>

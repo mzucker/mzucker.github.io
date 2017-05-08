@@ -1,0 +1,146 @@
+<h1 style="border-top: 1px solid #bbb; margin-top: 24px; padding-top: 24px">Comments</h1>
+<div class="comment">
+<p>Comments are closed, see <a href="/2017/05/08/no-more-disqus.html">here</a> for details.</p>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">richwiss</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>As someone who enjoys similar short interludes of FreeFlow, I have four questions. (Note that I skimmed bits of the code but there's no chance I understand it yet.)</p><p>1. In the two figures you have in the fast-forwarding section, you say "Cyan must now follow the single-cell-wide passage until the flow is completed, creating a 2x1 stranded region that invalidates the entire chain". I guess you are assuming that once a flow is next to the endpoint, you must flow to the endpoint, which makes ending a flow a zero-cost move. However, it would also be possible to go up (rather than right and ending the flow), then right, then down. This would have filled the 2x1 region that was leftover in your solution. There have been countless FreeFlow puzzles where I've filled otherwise stranded regions in order to solve the puzzle. What I don't know is if my solution at the time was simply an alternative way to solve it or if in fact that was the intended way to solve it. If it is the latter, that causes problems for your solver. For example, there is no found solution to this puzzle:</p><p>O.OG.<br>Y..YG<br>B.BR.<br>...R.<br>.....</p><p>The solution is</p><p>OoOGg<br>YyyYG<br>BbBR0<br>789R1<br>65432</p><p>where lowercase represents the flow and the numbers represent the path of the red flow.</p><p>2. There are many - perhaps a majority of? - FreeFlow puzzles that can be solved according to the "stay along the wall" algorithm where you first complete a flow that can be completed by staying along a wall (which creates a new wall), and then recursing until a solution is reached. Did you consider any speedup hacks of that nature while you were working on this?</p><p>3. Along the lines of #2, FreeFlow would consider your solutions "imperfect" because you didn't complete a single flow before moving on to the next. My hunch is that with the smaller puzzles you'd be able to solve these without too much of a performance impact. Any ideas? (Not sure where to hack at your code to enforce this but will look further.)</p><p>4. Your last few posts have been in Python. What made C a better choice? Previous infrastructure?</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>1. Pretty sure that up-right-down would violate the constraint that a colored flow cell has only two neighbors of the same color. I don't think Flow Free allows "looping back" like that.</p><p>2. Yep -- that's a big part of how I order things. Always start along the wall, prefer colors closer to wall (all else being equal), prefer most constrained move first. Tried hard to bring in some of that conventional wisdom.</p><p>3. Yes, big performance impact for larger puzzles. The code was doing this for a while but I disabled it because it helped solve tricky 14x14 ones. The good news is, you can always observe the solution the program produces and then enter it into the puzzle "the right way".</p><p>4. Speed! Also, I like using different languages for different tasks. A lot of the low-level operations in this program use bitwise operators -- for instance, we can track which flows have been completed with a 16-bit field, because there are a maximum of 16 colors. I would never have written the raytracer in Python, nor would I expect a solver like this to be nearly as fast in an interpreted language (but I'm sure someone will come along with JS and prove me wrong).</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">richwiss</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>1. Flow Free 11x11 Mania board 12 and my "perfect" solution are attached. And a link to a preferred solution: <a href="https://flowfreesolutions.com/solution/?game=flow&amp;pack=11mania&amp;set=11&amp;level=12" rel="nofollow noopener">https://flowfreesolutions.com/...</a></p><p>2. Excellent.</p><p>3. Yes, of course you can redo them. I used to care about such things and take screenshots of my imperfect solutions so I could redo them. Browsing my screenshots found the solution attached below in March 2015. I no longer care :)</p><p>4. I promise never to write it in JS. Or Perl.</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>Ok, commit e44f007 now lets you disable the path self-touch test to make dumb solutions :)</p><p>Here's one that corresponds to neither solution you showed me:</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">asmeurer</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>In my experience playing the game, every puzzle has an "elegant" solution that doesn't require self touching paths, but often when solving by hand you end up using it, because just finding a solution at all is already hard enough without finding the true "elegant" solution.</p><p>Of course, the puzzles in the game are designed that way, but I imagine if you generated puzzles randomly you could create puzzles that are only solvable with self touching paths (as a simple example, imagine a large puzzle board with only one color).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">asmeurer</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>What's so bad about using SAT or ILP? Techniques like the ones you've used here focus on how to *solve* a problem. When using a SAT solver, the actual logic of solving is encoded once in the solver. You instead must focus on how to *represent* the problem. But the beauty of this is that you can build up abstractions (to be sure, solvers also often must be built around those abstractions to keep things efficient). One could potentially represent a puzzle like Flow Free in a very high level and natural way and have it "compile" to a solver. </p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>Maybe it's just personal preference? My own experience with generic algorithms to solve SAT, ILP, exact cover, etc. is that a) I spend more time trying to represent my problem to the solver than I would otherwise spend coding it up from scratch, and b) it can be hard/inefficient to represent domain knowledge that helps reject partial solutions early (like the validity checks here), or prioritize partial solutions.</p><p>On the other hand, the "if you have a hammer, the whole world looks like a nail" thing is a bit on the nose for me. I just like using tools I know, and I have a lot of experience with finagling best-first search to do what I want.</p><p>Also, I'm curious -- who are the end users of "industrial-strength" SAT solvers or ILP solvers? What are some real-world problems they shine on?</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">asmeurer</span> &middot; <span class="comment-date">2016-Aug-29</span>
+</div>
+<div class="comment-body">
+<p>"Personal preference" is a lot different from "everyone who uses SAT has made poor life choices". I think SAT and similar solvers have very powerful potential, and it's disappointing to see people just throw them out the window (and insult those who use them).</p><p>Representational issues are a problem because most SAT solvers require input in CNF. I personally would like to see more solvers that allow representation in higher-level abstractions (Z3 has some great work in this area).</p><p>I agree that the domain knowledge thing is an issue. The best solution to that that I know of is to add pre-processing steps to trim the solution space.</p><p>My personal usage of SAT solvers is in the package dependency solver in conda. Basically, instead of representing package dependencies as a graph and trying to write a bunch of graph algorithms, you just represent dependencies as SAT (they translate quite nicely), and let the SAT solver figure it out. There's a bit more complexity once you turn it into an optimization problem (generally it's not enough to install a satisfiable set of packages, but rather a satisfiable set of packages with the newest versions), but it's still, in my opinion, nicer than writing the algorithms by hand. For instance, if you want to tweak the way the optimization works, it's just a matter of modifying a formula. Everything else in the code stays the same.</p><p>I know that in industry solvers are used for solving problems in operations research, and chip design (I don't have expertise in either of these, so I can't really say much more about them unfortunately).</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Aug-31</span>
+</div>
+<div class="comment-body">
+<p><a href="https://twitter.com/matt_zucker/status/770813434157993989" rel="nofollow noopener">https://twitter.com/matt_zucke...</a><br>Mea culpa</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Michel Steiner</span> &middot; <span class="comment-date">2016-Nov-07</span>
+</div>
+<div class="comment-body">
+<p>I also decided to try writing a Flow Free solver sometimes ago. Then I discovered your<br>interesting blog on the subject so I changed my goal… I’m now trying to write a<br>solver faster than yours! ;-)</p><p>After a lot of work, I’m now at &lt;0.25 seconds worst time for the most complex 14x14<br>puzzle.</p><p>No A* search, no SAT, no heuristic! But quite a few lines of code to analyze the<br>board before starting (to remove some directions for some cells). Then I explore<br>the tree and attempt to find bad moves as soon as possible.</p><p>But I’m not sure we can compare directly our results… we are not using the same PC!</p><p>Also, I’m wondering if we are testing with the same set of puzzles!? Apparently you have<br>30 * 14x14. I found 90 of them, and I’m applying 8 different symmetries to each<br>puzzle to make sure the algorithm is not too sensible to the orientation of the<br>puzzle.</p><p> Do you think the run time with your 2 solutions is impacted by the orientation of the<br>puzzle? For example if you apply a rotation of 90, 180 or 270 degrees, or a<br>horizontal central symmetry, or both. Would your code continue to explore the<br>same number of nodes? (I can provide files with puzzle definitions if you are<br>interested).</p><p>Btw, have you seen puzzles larger than 14x14? I did not, and I’m wondering how well these<br>algorithms scale up!?</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Nov-07</span>
+</div>
+<div class="comment-body">
+<p>Glad I inspired you to try to beat me :)  I don't have your code, but feel free to compare your code to mine on your PC, or open-source your solver so others can compare.</p><p>To be honest, I only have tested on the small number of 14x14 puzzles included in my github repository (see <a href="https://github.com/mzucker/flow_solver/tree/master/puzzles" rel="nofollow noopener">https://github.com/mzucker/flo...</a> ). There are a large number of puzzles available at <a href="https://flowfreesolutions.com/flow/?pack=flow-pack-jumbo" rel="nofollow noopener">https://flowfreesolutions.com/...</a> but they are only presented graphically, not in text form. I have no desire to hand-enter all of their posted puzzles, but you may be more enterprising than I am. I was also a bit concerned about fair use if I copied the entirety of the puzzle data set from another source and open-sourced it.</p><p>Almost certainly my C-based solver is sensitive to rotations/flips. I tried to make it less sensitive by assigning priorities based on distances from walls/center, but I imagine it would depend partially on the order the puzzle is defined in.</p><p>I have not tried any puzzles larger than 14x14, nor have I seen any out there. I'm pretty sure this problem is in NP (since both solution techniques I used are typically used for NP-hard problems); however, there are lots of problems ostensibly in NP that scale better than you might think on any real-world examples. This in fact was part of my initial, unfounded skepticism about SAT. The best answer seems to just be "try and see".</p><p>To be honest, I lost interest in optimizing my C solver when I realized my worst-case times were in the same ballpark as SAT. It seems silly to hand-tune a solution that encodes lots of domain knowledge when it's within less than an order of magnitude of a turn-key, "know nothing" solution.</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Michel Steiner</span> &middot; <span class="comment-date">2016-Nov-08</span>
+</div>
+<div class="comment-body">
+<p>My code is not clean enough to be published as open source (at least not yet - I’m not a professional developer). But of course I’m ready to email it to you if you’re interested. Potential problem… it’s written in VB.NET (nobody’s perfect! ;-)). I’m not a C specialist and did not manage to run your code. Is it supposed to run under Windows/Visual Studio?</p><p>I also have a limited number of puzzles. I managed to extract their definitions from files I found after installing Flow Free on a device! I found 2’490 puzzles ranging from 5x5 to<br>14x14 (90 of them are 14x14). Multiply these number by 8 with the possible symmetries. There are more puzzles available (for example there is a pack with 150 * 14x14), but I did not find their definition files. Good point about “fair use of these puzzles”. We have to be careful about this…</p><p>I understand your last point about SAT which is more generic. But my point is that if you had added a few more optimizations into your C solver, it would have decreased the number of nodes to explore by a very large amount. For example you explore 130’734 nodes for the 14x14_30 puzzle, while my solver only explores 274 nodes for that problem (with run time of 3ms). Some of these optimizations only require a few lines of code and have profound effects. I think this re-opens the question "is SAT better than A* Search" for this problem?</p><p>Note that my solver only searches for “elegant” solutions with no self-touching path (as explained by asmeurer). In fact, it helps doing this because it decreases the number of possibilities to explore. Not sure what’s your latest code do?</p><p>Btw, I added a new powerful optimization this morning. New worst case: 63ms (5’758 nodes to explore). It’s with a puzzle you did not try. I have tried a few additional optimisations, but sometimes the cost of running them it too high for the benefit they bring.</p><p>Just curious, is the SAT solution sensible to rotations/symmetries? And is there a way to make it more efficient?</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Nov-08</span>
+</div>
+<div class="comment-body">
+<p>Michel - you raise a lot of interesting points, sounds like you're almost ready to start your own blog!</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Michel Steiner</span> &middot; <span class="comment-date">2016-Nov-10</span>
+</div>
+<div class="comment-body">
+<p>Oh, I’m sorry! I thought it was appropriate to discuss the subject on your blog.</p><p>I won’t create my own blog, but I’ll continue improving the code. The more I think<br>about it, the more I find ways to make things faster. It seems to me that the<br>key to write a fast solver is to find forced and bad moves rapidly. The<br>algorithm to traverse the tree is not that important after all, because there<br>is not that many nodes to explore! Did you say needlessly complex? ;-)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Michel Steiner</span> &middot; <span class="comment-date">2017-Jan-17</span>
+</div>
+<div class="comment-body">
+<p>Matt – I’ve a file with the definition for 150 * 15x15 puzzles, if you’re interested to test your solutions with larger puzzles.</p>
+</div>
+</div>

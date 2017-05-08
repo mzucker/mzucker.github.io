@@ -1,0 +1,148 @@
+<h1 style="border-top: 1px solid #bbb; margin-top: 24px; padding-top: 24px">Comments</h1>
+<div class="comment">
+<p>Comments are closed, see <a href="/2017/05/08/no-more-disqus.html">here</a> for details.</p>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Giancarlo Ventura Granados</span> &middot; <span class="comment-date">2016-Sep-26</span>
+</div>
+<div class="comment-body">
+<p>Great post and great application</p>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Leonel Salazar</span> &middot; <span class="comment-date">2016-Sep-28</span>
+</div>
+<div class="comment-body">
+<p>Hi there, I can't run the program, it gives me this output and I can't solve the problem by myself, I'm running Debian Jessie... I'm testing using one of the images from this webpage.<br>Traceback:<br>$ noteshrink /home/lordford/Downloads/notesA1.jpg <br>opened /home/lordford/Downloads/notesA1.jpg<br>  getting palette...<br>Traceback (most recent call last):<br>  File "/usr/local/bin/noteshrink", line 9, in &lt;module&gt;<br>    load_entry_point('noteshrink==0.1.0', 'console_scripts', 'noteshrink')()<br>  File "build/bdist.linux-x86_64/egg/<a href="http://noteshrink.py" rel="nofollow noopener">noteshrink.py</a>", line 582, in main<br>  File "build/bdist.linux-x86_64/egg/<a href="http://noteshrink.py" rel="nofollow noopener">noteshrink.py</a>", line 558, in notescan_main<br>  File "build/bdist.linux-x86_64/egg/<a href="http://noteshrink.py" rel="nofollow noopener">noteshrink.py</a>", line 381, in get_palette<br>  File "build/bdist.linux-x86_64/egg/<a href="http://noteshrink.py" rel="nofollow noopener">noteshrink.py</a>", line 106, in get_bg_color<br>TypeError: unique() got an unexpected keyword argument 'return_counts'</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Sep-29</span>
+</div>
+<div class="comment-body">
+<p>Yep, I was unaware return_counts was a recently added option in numpy.unique. You will need numpy 1.10 or greater to run the script. I have updated the requirements.txt in the repo, but I haven't yet incremented my version number and re-uploaded to PyPI, working on it...</p>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Cidraque</span> &middot; <span class="comment-date">2016-Oct-23</span>
+</div>
+<div class="comment-body">
+<p>Only linux? :(</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Oct-23</span>
+</div>
+<div class="comment-body">
+<p>It should work on any system where you can install Python and the requirements, including windows.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Mekk</span> &middot; <span class="comment-date">2016-Oct-23</span>
+</div>
+<div class="comment-body">
+<p>Congratulations for interesting software and for very clear writing, showing non-trivial algorithm in very understandable way.  Thank you.</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Oct-23</span>
+</div>
+<div class="comment-body">
+<p>Thanks!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Sergio</span> &middot; <span class="comment-date">2016-Oct-24</span>
+</div>
+<div class="comment-body">
+<p>Hi! Thanks for providing this tool. I was trying to make it work with Python 2.7 but, after installing the required packages successfully I get the following error:<br>    "running PDF command "convert page0000.png output.pdf"..."<br>    "warning: PDF command failed"<br>And only PNG is generated. <br>Do you know what should be failing?<br>Thanks in advance!</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Oct-24</span>
+</div>
+<div class="comment-body">
+<p>Yes, it looks like the ImageMagick software is not installed. Please see <a href="http://www.imagemagick.org/script/binary-releases.php" rel="nofollow noopener">http://www.imagemagick.org/scr...</a> or use your usual package manager (apt-get/macports/homebrew/etc.) to install it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Kelvin Titimbo</span> &middot; <span class="comment-date">2016-Nov-12</span>
+</div>
+<div class="comment-body">
+<p>Hi, thank you for this tool. I would like to know whether is possible to<br> convert pdf files.</p><p>I have been trying to convert my pdf's as png, but the quality is not the best, so the final output does not have the best resolution.</p>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matthias Laumer</span> &middot; <span class="comment-date">2016-Nov-15</span>
+</div>
+<div class="comment-body">
+<p>Dear Matt, a user from a german forum asked me / the community if someone would create a GUI for your noteshrinker... (additionally to the django based which is alread existing). Therefor I would get in touch with you via email, if it is possible and wanted by you... (of course it will be open source and hosted on github...) hopefully you can see my mail-adress due to this comment... Regards Matthias</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Nov-16</span>
+</div>
+<div class="comment-body">
+<p>Hi Matthias - the software is open sourced with a very permissive license. There's nothing stopping anyone from picking it up and doing pretty much whatever they'd like with it. I don't have time to support development of a GUI but I encourage you and your fellow forum members to go for it!</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matthias Laumer</span> &middot; <span class="comment-date">2016-Nov-16</span>
+</div>
+<div class="comment-body">
+<p>Hey Matt, thanks for your fast reply! Of course we will take care of development of the GUI ;-) no support from your side should be needed... your programm is in a good shape and structure. I just wanted to be sure and have asked for your permission (beside the MIT license) :-D Maybe in a few weeks / months(?) depending on my time which I can spend I'll get in touch with you again, just to let you know the github repo of the finished GUI! Thanks so far and best regards from Germany, <br>Matthias</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matthias Laumer</span> &middot; <span class="comment-date">2016-Dec-15</span>
+</div>
+<div class="comment-body">
+<p>Hi Matt, here you can find the first alpha if you want to have a look at it -&gt; <a href="https://github.com/Acer54/noteshrinker-qt" rel="nofollow noopener">https://github.com/Acer54/note...</a> ... for Win User, there is a zip file with all dependencies ... for Linux and Mac only source code is available. Take a look at the release notes as well... I have made a few changes, e.g. replacing PIL and Imagemagick with qt4 libs. Regards, Matthias</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Xemmas Enesimo Cuarto</span> &middot; <span class="comment-date">2016-Dec-04</span>
+</div>
+<div class="comment-body">
+<p>Hey, have you tried using graphics magick instead of image magick?</p>
+</div>
+<div class="comment-children">
+<div class="comment">
+<div class="comment-header">
+<span class="comment-author">Matt Zucker</span> &middot; <span class="comment-date">2016-Dec-05</span>
+</div>
+<div class="comment-body">
+<p>No, I imagine it would probably work as long as the command line arguments to 'convert' haven't been changed too much...</p>
+</div>
+</div>
+</div>
+</div>
