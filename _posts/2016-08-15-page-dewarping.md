@@ -372,6 +372,8 @@ day. Who knows -- maybe I'll refer back to this project again the next
 time I teach
 [computer vision](http://www.swarthmore.edu/NatSci/mzucker1/e27_s2016/)...
 
+{% include 5068118665.html %}
+
 
   
   

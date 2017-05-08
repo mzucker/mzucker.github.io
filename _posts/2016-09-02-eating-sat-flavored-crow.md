@@ -415,3 +415,5 @@ Appendix: experimental data
 [DeMorgan's law]: https://en.wikipedia.org/wiki/De_Morgan%27s_laws
 [StackOverflow answer]: http://stackoverflow.com/a/23626076/5356230
 [incremental]: http://baldur.iti.kit.edu/sat-competition-2016/index.php?cat=incremental
+
+{% include 5115528064.html %}

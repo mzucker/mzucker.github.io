@@ -249,3 +249,27 @@
         }
     }
 }
+
+.comment {
+  font-size: 11pt;
+}
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-date {
+  color: $grey-color;
+  font-size: $small-font-size;
+}
+
+.comment-body {
+  margin-bottom: $spacing-unit / 2;
+}
+
+.comment-header {
+}
+
+.comment-children {
+  margin-left: 2em;
+}
