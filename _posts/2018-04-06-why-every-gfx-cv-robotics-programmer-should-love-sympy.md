@@ -417,9 +417,5 @@ look at using SymPy to compute symbolic derivatives and gradients,
 with applications in nonlinear least squares and deriving probability
 density functions. Stay tuned!
 
-Please take your questions/comments to this twitter thread:
-
-<div class="center-threequarters">
-TODO: add tweet
-</div>
+Questions/comments? Chime in on [this twitter thread](https://twitter.com/matt_zucker/status/982327904871833601)!
 
