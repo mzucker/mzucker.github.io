@@ -230,6 +230,13 @@ pre {
     border: 1px solid black;
 }
 
+.center-quarter
+{
+    margin: 0 auto;
+    display: block;
+    width: 25%;
+}
+
 .center-half
 {
     margin: 0 auto;
@@ -242,6 +249,13 @@ pre {
     margin: 0 auto;
     display: block;
     width: 75%;
+}
+
+.info
+{
+  background-color: #dfd;
+  padding: 10px;
+  font-style: italic;
 }
 
 
