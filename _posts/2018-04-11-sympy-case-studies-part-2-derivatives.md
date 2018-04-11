@@ -382,7 +382,7 @@ automatically derive differential area elements for various
 parameterizations of the unit sphere, for applications like
 Monte Carlo integration.
 
-In the meantime, please post questions/comments to this twitter
-thread.  Likes and retweets are awesome (and appreciated), but
+In the meantime, please post questions/comments to this [twitter
+thread](https://twitter.com/matt_zucker/status/984151264220114944).  Likes and retweets are awesome (and appreciated), but
 they're no substitute for concrete reader feedback. What parts 
 of this post series are good/boring/unclear? Let me know!
