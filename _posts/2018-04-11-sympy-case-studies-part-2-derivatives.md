@@ -352,13 +352,15 @@ grad[7] = -h*sigma_15*sigma_7;
 Although I would quibble with a few aspects of the code above
 (unimaginative variable names, gratuitous use of `pow` to square or
 cube numbers, using long doubles `1.0L/2.0L` where a simple `0.5`
-would do), it's nonetheless far superior to the previous attempt.
+would do[^4]), it's nonetheless far superior to the previous attempt.
 A small amount of cleanup work will turn this into a program I
 wouldn't be ashamed to have on my github.
 
+[^4]: SymPy contributor [@asmeurer](https://twitter.com/asmeurer) passed along [a tip to suppress the long doubles](https://twitter.com/asmeurer/status/984171826850025472) and mentioned that [a future SymPy release will address the `pow` issue](https://github.com/sympy/sympy/pull/14139).
+
 So to conclude: **not only will SymPy work out your gradients for you,
 it will directly implement them in semi-reasonable-looking C code!**
-It would be worth it at twice the price.[^4]
+It would be worth it at twice the price.[^5]
 
 By the way,
 [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation)
@@ -372,7 +374,7 @@ implementations in other languages;
 [autodiff.org](http://www.autodiff.org/?module=Tools&language=ALL)
 maintains a sporadically-updated database of these.
 
-[^4]: Of zero dollars.
+[^5]: Of zero dollars.
 
 Next time
 =========
