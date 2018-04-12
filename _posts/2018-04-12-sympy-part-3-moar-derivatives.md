@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "SymPy part 3: moar derivatives!"
+image: /images/sympy/crossprod.png
 ---
 
 Automatically deriving area elements for various parameterizations of
