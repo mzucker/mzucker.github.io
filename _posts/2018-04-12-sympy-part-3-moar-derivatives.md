@@ -296,7 +296,7 @@ this series, including:
   
 I'm not sure yet exactly which topics I'll cover, or how many posts
 it'll take to do so, so if you have particular requests or questions,
-please chime in on this [twitter thread](). 
+please chime in on this [twitter thread](https://twitter.com/matt_zucker/status/984580823490990082). 
 
 Thanks for reading!
 
