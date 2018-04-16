@@ -16,7 +16,7 @@ wait until tomorrow's post because once again, I found I had more to
 write than would fit in a single post. So today, I'm going to cover
 automatically generating gradient code (complete with common
 subexpression elimination!), and tomorrow I'll be going over some more
-advanced applications of derivatives in SymPy.
+advanced applications of derivatives in SymPy (see [part 3]({% post_url 2018-04-12-sympy-part-3-moar-derivatives %})).
 
 Motivation: automatic differentiation in machine learning
 =========================================================
@@ -379,10 +379,11 @@ maintains a sporadically-updated database of these.
 Next time
 =========
 
-Tomorrow I'll showcase how to use SymPy's capabilities to
-automatically derive differential area elements for various
-parameterizations of the unit sphere, for applications like
-Monte Carlo integration.
+[Tomorrow]({% post_url
+2018-04-06-why-every-gfx-cv-robotics-programmer-should-love-sympy %})
+I'll showcase how to use SymPy's capabilities to automatically derive
+differential area elements for various parameterizations of the unit
+sphere, for applications like Monte Carlo integration.
 
 In the meantime, please post questions/comments to this [twitter
 thread](https://twitter.com/matt_zucker/status/984151264220114944).  Likes and retweets are awesome (and appreciated), but

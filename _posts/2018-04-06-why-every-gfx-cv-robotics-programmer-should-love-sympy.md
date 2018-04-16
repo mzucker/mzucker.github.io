@@ -14,6 +14,8 @@ math in "real-world" projects.[^1] Part 1 (this post) will cover
 equation solving using SymPy. A future post will delve further into
 derivatives and gradients.
 
+***Update:** [part 2]({% post_url 2018-04-11-sympy-case-studies-part-2-derivatives %}) and [part 3]({% post_url 2018-04-12-sympy-part-3-moar-derivatives %}) of this series have now been posted.*
+
 [^1]: ...to the extent that making pretty pictures on a computer screen is a "real-world" use-case.
 
 
