@@ -150,6 +150,10 @@ pre {
     }
 }
 
+video {
+  width: 100% !important;
+  height: auto !important;
+}
 
 
 /**
@@ -258,6 +262,13 @@ pre {
   font-style: italic;
 }
 
+.warning
+{
+  background-color: #fdd;
+  padding: 10px;
+  font-style: italic;
+}
+
 
 .footnotes
 {
@@ -305,6 +316,15 @@ span.caption {
 .caption code {
     font-style: normal;        
 }
+
+.image-caption {
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+    font-size: $small-font-size;
+}  
 
 .video-container {
     position: relative;
