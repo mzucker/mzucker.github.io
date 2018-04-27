@@ -448,7 +448,7 @@ compute any derivatives, it does include more functionality because it
 does both full and local optimizations.
 
 That's all for now -- I had a good time putting together the program
-and this post.  Hit me up on twitter if you have any questions or
+and this post.  [Hit me up on twitter](https://twitter.com/matt_zucker/status/989959910371807232) if you have any questions or
 comments!
 
 
