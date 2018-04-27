@@ -157,7 +157,10 @@ organization shared by all TensorFlow programs, and more importantly
 it showcases TensorFlow's ability to automatically find variable
 values that minimize an arbitrary differentiable loss function.
 
-## Moving image fitting to tensorflow
+## Moving image fitting to TensorFlow
+
+Now that we all understand a little bit about how TensorFlow works,
+let's talk about rewriting the image fitting program to use it.
 
 The old program, [`imfit.cpp`](https://github.com/mzucker/imfit/blob/master/src/imfit.cpp), implements
 [hill climbing](https://en.wikipedia.org/wiki/Hill_climbing) using a
@@ -383,6 +386,7 @@ Running for 256 iterations at an image width of 64 pixels takes around
   
 <video controls poster="/images/tf-imfit/progress_lores.jpg">
   <source src="/images/tf-imfit/progress_lores.mp4" type="video/mp4"/>
+  <source src="/images/tf-imfit/progress_lores.webm" type="video/webm"/>
 </video>
 
 What you're seeing above is a succession of individual Gabor functions
@@ -408,6 +412,7 @@ behind the scenes:
 
 <video controls poster="/images/tf-imfit/progress_midres.jpg">
   <source src="/images/tf-imfit/progress_midres.mp4" type="video/mp4"/>
+  <source src="/images/tf-imfit/progress_midres.webm" type="video/webm"/>
 </video>
 
 Next, we run for 512 iterations at an image width of 128 pixels, for a
@@ -415,12 +420,14 @@ duration of 14m31s:
 
 <video controls poster="/images/tf-imfit/progress_hires.jpg">
   <source src="/images/tf-imfit/progress_hires.mp4" type="video/mp4"/>
+  <source src="/images/tf-imfit/progress_hires.webm" type="video/webm"/>
 </video>
 
 Finally, we just run one single round of global optimization at an image width of 256 pixels, without any re-fits. This takes 1m54s:
 
 <video controls poster="/images/tf-imfit/progress_final.jpg">
   <source src="/images/tf-imfit/progress_final.mp4" type="video/mp4"/>
+  <source src="/images/tf-imfit/progress_final.webm" type="video/webm"/>
 </video>
 
 All together, the total runtime for `tf-imfit.py` is **25 minutes and 57 seconds**. In comparison, `imfit.cpp` achieved slightly lower quality after running for about **three days** (yes, days, not hours). Serendipitously,
