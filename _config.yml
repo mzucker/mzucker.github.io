@@ -20,7 +20,7 @@ markdown: kramdown
 # Google services
 google_analytics: UA-82495353-1
 
-gems:
+plugins:
   - jekyll-seo-tag
 
 twitter:
