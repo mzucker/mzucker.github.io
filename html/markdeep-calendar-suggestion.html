@@ -40,6 +40,9 @@
              font-size: 11px;
              font-family: Helvetica,Arial,sans-serif;
          }
+         .md a {
+             font-family: Georgia,Palatino,'Times New Roman';
+         }         
          td, th {
              display: table-cell;
              vertical-align: inherit;
@@ -63,9 +66,14 @@ September 4 thru 6 2018: Stuff
 September 29 through October 3 2018: Stuff
 September 29--October 3 2018: Stuff
         </pre>
-        <h3>Appearance</h3>
-        <p>Obviously this gets harder if you have date ranges that span weeks, or overlap.</p>
-        <p>Not sure how spanning weeks would impact weekend autodetection.</p>
+        <h3>Text appearance</h3>
+        <p>Use n-dash to separate dates, probably don't care as much about days of week for date range?</p>
+        <p>4&ndash;6 Sep 2018</p>
+        <p>29 Sep&ndash;3 Oct 2018</p>
+        <p>22 Dec 2018&ndash;1 Jan 2019</p>
+        <h3>Calendar appearance</h3>
+        <p>Obviously this gets harder if you have date ranges that span weeks, or overlap. Would probably want to repeat text in multiple weeks (as Apple Calenar does in Month view).
+        Not sure how spanning weeks would impact weekend autodetection.</p>
         <span class="md">
             <table class="calendar">
                 <tbody>
