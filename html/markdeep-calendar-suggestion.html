@@ -1,0 +1,266 @@
+<html>
+    <head>
+        <style >
+         body {
+             max-width: 680px;
+             margin: auto;
+             padding: 20px;
+             text-align: justify;
+             line-height: 140%;
+             -webkit-font-smoothing: antialiased;
+             -moz-osx-font-smoothing: grayscale;
+             font-smoothing: antialiased;
+             color: #222;
+             font-family: Palatino,Georgia,"Times New Roman",serif;
+         }
+         table {
+             display: table;
+             border-collapse: separate;
+             border-spacing: 2px;
+             border-color: grey;
+         }
+         table {
+             white-space: normal;
+             line-height: normal;
+             font-weight: normal;
+             font-size: medium;
+             font-style: normal;
+             color: -internal-quirk-inherit;
+             text-align: start;
+             font-variant: normal;
+         }
+         .md table {
+             border-collapse: collapse;
+             line-height: 140%;
+             page-break-inside: avoid;
+         }
+         .md table.calendar {
+             width: 100%;
+             margin: auto;
+             font-size: 11px;
+             font-family: Helvetica,Arial,sans-serif;
+         }
+         td, th {
+             display: table-cell;
+             vertical-align: inherit;
+         }
+        </style>
+    </head>
+    <body>
+        <h3>Possible syntax</h3>
+        Basically just autodetect a date followed by one of -, --, to, thru, through then another date:
+        <pre>
+September 4, 2018 - September 6, 2018: Stuff
+September 4, 2018 -- September 6, 2018: Stuff
+September 4, 2018 to September 6, 2018: Stuff
+September 4, 2018 thru September 6, 2018: Stuff
+September 4, 2018 through September 6, 2018: Stuff
+        </pre>
+        Easier for authoring if you can handle it, but understandable if not because it might make date parsing (more?) gross:
+        <pre>
+September 4-6 2018: Stuff
+September 4 thru 6 2018: Stuff
+September 29 through October 3 2018: Stuff
+September 29--October 3 2018: Stuff
+        </pre>
+        <h3>Appearance</h3>
+        <p>Obviously this gets harder if you have date ranges that span weeks, or overlap.</p>
+        <p>Not sure how spanning weeks would impact weekend autodetection.</p>
+        <span class="md">
+            <table class="calendar">
+                <tbody>
+                    <tr>
+                        <th colspan="14">September 2018</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Monday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Tuesday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Wednesday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Thursday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Friday</td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">27</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">28</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">29</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">30</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">31</td>
+                        <td>&nbsp;</td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;" class="today">3</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;" class="today"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;background-color:#cfc;"><b>4</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;background-color:#cfc;">
+                            <a href="#">Option 1: just color cell backgrounds</a>
+                        </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;background-color:#cfc;">5</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;background-color:#cfc;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;background-color:#cfc;">6</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;background-color:#cfc;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">7</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">10</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;"><b>11</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">12</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">13</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">14</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">17</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;"><b>18</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">19</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">20</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">21</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">24</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;"><b>25</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">26</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">27</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">28</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">1</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">2</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">3</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">4</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">5</td>
+                        <td>&nbsp;</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="calendar">
+                <tbody>
+                    <tr>
+                        <th colspan="14">September 2018</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Monday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Tuesday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Wednesday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Thursday</td>
+                        <td colspan="2" width="14%" style="padding-top:5px;text-align:center;font-style:italic">Friday</td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">27</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">28</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">29</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">30</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">31</td>
+                        <td>&nbsp;</td>
+
+                    </tr>
+
+                    <tr valign="top">
+                        <td width="1%"  style="text-align:right;border:1px solid #EEE;border-right:none;" class="today" rowspan="2">3</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;" class="today" rowspan="2"> &nbsp; </td>
+                        <td width="1%"  style="text-align:right;border:1px solid #EEE;border-right:none;border-bottom:none;"><b>4</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;border-bottom:none;"> &nbsp; </td>
+                        <td width="1%"  style="text-align:right;border:1px solid #EEE;border-right:none;border-bottom:none;">5</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;border-bottom:none;"> &nbsp; </td>
+                        <td width="1%"  style="text-align:right;border:1px solid #EEE;border-right:none;border-bottom:none;">6</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;border-bottom:none;"> &nbsp; </td>
+                        <td width="1%"  style="text-align:right;border:1px solid #EEE;border-right:none;" rowspan="2" >7</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;" rowspan="2"> &nbsp; </td>
+                    </tr>
+
+                    <tr valign="top">
+                        <td colspan="6" style="border:1px solid #EEE;border-right:none;border-top:none;background-color:#cfc;">&nbsp;<a href="#">Option 2: Fancy column spanning</a></td>
+                    </tr>
+
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">10</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;"><b>11</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">12</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">13</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">14</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">17</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;"><b>18</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">19</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">20</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">21</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">24</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;"><b>25</b></td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">26</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">27</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+                        <td width="1%" height="30px" style="text-align:right;border:1px solid #EEE;border-right:none;">28</td>
+                        <td width="14%" style="border:1px solid #EEE;border-left:none;"> &nbsp; </td>
+
+                    </tr>
+                    <tr valign="top">
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">1</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">2</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">3</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">4</td>
+                        <td>&nbsp;</td>
+                        <td width="1%" height="30px" style="color:#BBB;text-align:right;">5</td>
+                        <td>&nbsp;</td>
+
+                    </tr>
+                </tbody>
+            </table>
+            
+        </span>
+    </body>
+</html>
