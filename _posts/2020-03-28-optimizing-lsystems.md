@@ -2,6 +2,7 @@
 layout: post
 title: Optimizing L-Systems
 date: 2020-03-28 17:12 -0400
+image: /images/lsystem_optimization/sierpinski_arrowhead_6_marked_up.png
 ---
 
 Socially isolating through obsessive micro-optimization.
