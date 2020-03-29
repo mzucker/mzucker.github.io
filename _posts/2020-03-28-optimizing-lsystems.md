@@ -1012,7 +1012,7 @@ just-in-time
 specific to each L-System could definitely increase throughput. But I
 don't want to get into the compiler business just yet, I think.
 
-Short of these things, I've applied all of the big optimizations I can think of. But if you think I missed any, or if you have any questions or comments on this post, [chime in on this twitter thread](https://twitter.com/matt_zucker/status/1244051545081155593)
+Short of these things, I've applied all of the big optimizations I can think of. But if you think I missed any, or if you have any questions or comments on this post, [chime in on this twitter thread](https://twitter.com/matt_zucker/status/1244051545081155593).
 
 Thanks for reading!
 
