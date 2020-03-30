@@ -523,7 +523,7 @@ void initialize_known_lsystems(void) {
 
 Of course C code is less pithy than Python, especially when
 implementing our own data types like the dynamically resized array.
-Unsurprisingly v2 is over 3x larger than v0, at 403 lines compared
+Unsurprisingly v2 is over 3x larger than v0, at 404 lines compared
 to 125.  However, the ***increase in throughput is over 100x***: 68.62
 *nanoseconds* per segment for v2, versus 7.615 microseconds per segment for v0.
 
@@ -606,7 +606,7 @@ darray_t* lsys_segments_recursive(const lsys_t* lsys,
 ```
 
 Adding recursion to v3 costs a few lines of code, growing the program
-to 456 lines from v2's 403 lines. So, what's the big payoff? ***A
+to 457 lines from v2's 404 lines. So, what's the big payoff? ***A
 whopping 8% increase in throughput!*** The time per segment goes down, but only just barely to
 63.45 ns per segment, versus v2's 68.62 ns per segment. 
 
@@ -667,7 +667,7 @@ Compare with the v4 version:
         float ynew = state->pos.y + state->rot.s;
 ```
 
-The v4 program weighs in at 460 lines of code and clocks at 64.94 ns
+The v4 program weighs in at 461 lines of code and clocks at 64.94 ns
 per segment -- not a really significant changes from v3 in either metric.
 
 ### v5: Precomputing all rotations {#v5}
@@ -724,7 +724,7 @@ Here's the new code in `_lsys_execute_symbol` for handling `+` and `-`:
 
 This small amount of precomputation delivers a big increase in
 performance: v5 is down to 29.64 ns per segment (over 2x faster than
-v3 and v4), and weighs in at 498 lines of code. 
+v3 and v4), and weighs in at 499 lines of code. 
 
 For those keeping score at home, we are now ***over 250x faster*** than
 the initial Python version. But hey, let's keep going!
@@ -900,7 +900,7 @@ array, subsequent calls to `_lsys_segments_r` for the same symbol /
 iteration count computation will play back the previous computation.
 
 Implementing memoization caused a substantial increase in program size
--- v6 is 627 lines of code compared with 498 in v5. However, there's a
+-- v6 is 628 lines of code compared with 499 in v5. However, there's a
 very respectable performance increase, as v6 achieves 9.583 ns per
 segment versus 29.64 ns per segment for v5 -- ***over a 3x speedup!***
 
@@ -933,7 +933,7 @@ which gave a nice little performance boost. Here's the relevant change:
 Again, we make sure there is some benefit to parallelization by avoiding
 thread startup overhead for small runs of segments.
 
-The final v7 version is 659 lines of code and runs at 6.073 ns per segment, ***over 1200x faster than the original Python version***, while weighing in at less than 6x the size.
+The final v7 version is 660 lines of code and runs at 6.073 ns per segment, ***over 1200x faster than the original Python version***, while weighing in at less than 6x the size.
 
 Results
 =======
@@ -974,12 +974,12 @@ they are discussed.
 |:-:|:-:|:-:|:-:|:-:|:-:|:--
 | [v0](#v0) | Python | ✓ |   | 125 | 7.615 μs | Initial Python version 
 | [v1](#v1) | Python |   | ✓ | 172 | 8.843 μs | Added recursion
-| [v2](#v2) | C      | ✓ |   | 403 | 68.62 ns | Initial C version
-| [v3](#v3) | C      |   | ✓ | 456 | 63.45 ns | Added recursion
-| [v4](#v4) | C      |   | ✓ | 460 | 64.94 ns | Cache trigonometry
-| [v5](#v5) | C      |   | ✓ | 498 | 29.64 ns | Precompute all rotations
-| [v6](#v6) | C      |   | ✓ | 627 | 9.583 ns | Memoization
-| [v7](#v7) | C      |   | ✓ | 659 | 6.073 ns | OpenMP parallelization
+| [v2](#v2) | C      | ✓ |   | 404 | 68.62 ns | Initial C version
+| [v3](#v3) | C      |   | ✓ | 457 | 63.45 ns | Added recursion
+| [v4](#v4) | C      |   | ✓ | 461 | 64.94 ns | Cache trigonometry
+| [v5](#v5) | C      |   | ✓ | 499 | 29.64 ns | Precompute all rotations
+| [v6](#v6) | C      |   | ✓ | 628 | 9.583 ns | Memoization
+| [v7](#v7) | C      |   | ✓ | 660 | 6.073 ns | OpenMP parallelization
 
 Full source code for each version is available in the [github repository](https://github.com/mzucker/lsystem_optimization).
 
