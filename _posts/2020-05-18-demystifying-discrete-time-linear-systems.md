@@ -12,8 +12,8 @@ Overview
 
 This is the first post in a multi-part series about controls and filtering. It's gonna start out basic but will hopefully lead to some nuggets that could be interesting even to readers with background in estimation and controls.
 
-With that said, if you're already familiar with thse fields you may
-find this fairly introductory. If not, stick
+With that said, if you're already familiar with thse fields you'll likely 
+find this particular post fairly introductory. If not, stick
 around and I'll do my best to define exactly what the heck *is* a
 discrete-time linear system.
 
@@ -53,8 +53,8 @@ fan), it's a control, and otherwise it's a state. I can definitely use
 the fan to *affect* the position and velocity of the ice block, but
 only indirectly, and over time. 
 
-The other rule is that you need the state to include *all* the
-variables needed to model the behavior of the system. I may only care
+The other rule is that the state must include *all* of the
+variables required to model the behavior of the system. I may only care
 about position and not velocity, but I have to include the velocity
 because I can't predict future positions without knowing something
 about the current velocity.
@@ -266,7 +266,7 @@ since we are focusing on just the effects of friction, we'll leave the fan off t
 Note that <span class="vel">velocity</span> is decaying exponentially
 towards zero as the friction bleeds off speed. In turn, you can see <span class="pos">position</span> exponentially converging towards a final resting position.
 
-Here's a slider so you can play with the coefficient:
+Here's a slider so you can play with the friction constant:
 
 <input class="linked_range" id="beta.range" type="range" min="0" max="2" step="0.1" value="0.5"> 
 β = <span class="linked_value" id="beta.span"></span>
@@ -352,7 +352,7 @@ force duration: <span class="linked_value" id="last_duration.span"></span> s
 <input class="linked_range" id="alpha2.range" type="range" min="0" max="5.0" step="0.1" value="0.0"> 
 α = <span class="linked_value" id="alpha2.span"></span> (spring constant)
 
-Note that now that we are also considering forces due to friction and the spring, the bottom <span class="force">force</span> no longer exactly corresponds to the slope of the <span class="vel">velocity</span> plot. 
+Note that now that we are also considering forces due to friction and the spring, the commanded <span class="force">force</span> from the fan no longer exactly corresponds to the slope of the <span class="vel">velocity</span> plot. 
 
 What's the point?
 =================
