@@ -215,6 +215,14 @@ video {
     display: block;
 }
 
+.pixel-image
+{
+  max-width: 100% !important;
+  image-rendering: pixelated;
+  margin: 0 auto;
+  display: block;
+}
+
 .halfwidth
 {
     width: 50%
@@ -342,4 +350,12 @@ span.caption {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.narrowplot
+{
+    margin: 0;
+    display: block;
+    width: 100% !important;
+    height: 100px !important;
 }
