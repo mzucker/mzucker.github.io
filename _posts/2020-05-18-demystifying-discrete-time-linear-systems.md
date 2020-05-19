@@ -2,6 +2,7 @@
 layout: post
 title: Demystifying discrete-time linear systems
 date: 2020-05-18 20:30 -0400
+image: /images/kalman_etc/ice_fan_spring.png
 ---
 
 Just what is a discrete-time linear system, and what kinds of
