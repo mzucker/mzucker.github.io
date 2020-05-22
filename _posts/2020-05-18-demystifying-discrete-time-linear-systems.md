@@ -13,7 +13,7 @@ Overview
 
 This is the first post in a multi-part series about controls and filtering. It's gonna start out basic but will hopefully lead to some nuggets that could be interesting even to readers with background in estimation and controls.
 
-With that said, if you're already familiar with thse fields you'll likely 
+With that said, if you're already familiar with these fields you'll likely 
 find this particular post fairly introductory. If not, stick
 around and I'll do my best to define exactly what the heck *is* a
 discrete-time linear system.
@@ -375,7 +375,7 @@ $$\mathbf{B}$$), and what are the passive dynamics of the system that
 unfold whether you are actively controlling it or not (that's
 $$\mathbf{A}$$). You can always turn off the active dynamics by
 specifying a control of zero, but your system is forever doomed 
-to the tyrrany of its own passive dynamics.
+to the tyranny of its own passive dynamics.
 
 Furthermore, many well-established and thoroughly-studied tools and
 techniques expect you to specify a system in a standard matrix
